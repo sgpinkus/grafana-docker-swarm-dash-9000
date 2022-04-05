@@ -1,7 +1,4 @@
 # OVERVIEW
-
-[!screen shot](./screen.png)
-
 A simple first crack at a grafana/prometheus/loki monitoring dash for a docker swarm cluster using docker-compose. Components:
 
   - grafana
@@ -15,6 +12,10 @@ A simple first crack at a grafana/prometheus/loki monitoring dash for a docker s
 
   - All containers are running in host network and there is lots of bind mounting going on to enable bare system monitoring. Promtail is configured to scrape the local journald logs.
   - It's impossible to really simulate a multi-node swamr with a docker-compose which assumes single node. Dash works in swarm too but scraper confs need to be updated etc.
+
+*SCREENSHOT:*
+
+<img width="100%" src="./screen.png" />
 
 # CONFIGURATION
 Docker daemon needs to be running locally, have metrics endpoint enabled, and use journald log-driver. Example:
@@ -38,5 +39,5 @@ May take a while after grafana is up for metrics to start coming. Compose file i
 # TODO
 
   - Apparently node-exporter has trouble getting access to all bare system metrics.
-  - Sometimes when you have a container in a crash loop lots of containers show up. [AFAIK](https://stackoverflow.com/q/71706413/2038383_ it's annoyingly hard to filter time series to "running right now" rather than "was running then" in PromQL.
+  - Sometimes when you have a container in a crash loop lots of containers show up. [AFAIK](https://stackoverflow.com/q/71706413/2038383) it's annoyingly hard to filter time series to "running right now" rather than "was running then" in PromQL.
   - Better panels ... lots of tweaking ....
