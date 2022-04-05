@@ -1,3 +1,4 @@
+---
 server:
   http_listen_port: 9080
   grpc_listen_port: 0
@@ -26,6 +27,7 @@ scrape_configs:
         target_label: syslog_identifier
       - source_labels: [__journal_container_name]
         target_label: container_name
-        # This crashes loki 
-        # - action: labelmap
+      - source_labels: [__journal_priority] # Not generally useful from docker containers.
+        target_label: priority
+        # - action: labelmap # This crashes loki. Too many labels is bad.
         #   regex: __journal_(.+)

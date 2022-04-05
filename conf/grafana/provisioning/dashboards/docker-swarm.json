@@ -49,7 +49,7 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 8,
+        "h": 6,
         "w": 8,
         "x": 0,
         "y": 0
@@ -114,7 +114,7 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 8,
+        "h": 6,
         "w": 8,
         "x": 8,
         "y": 0
@@ -179,7 +179,7 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 8,
+        "h": 6,
         "w": 8,
         "x": 16,
         "y": 0
@@ -256,7 +256,7 @@
             "axisPlacement": "auto",
             "barAlignment": 0,
             "drawStyle": "bars",
-            "fillOpacity": 0,
+            "fillOpacity": 25,
             "gradientMode": "none",
             "hideFrom": {
               "legend": false,
@@ -273,7 +273,7 @@
             "spanNulls": false,
             "stacking": {
               "group": "A",
-              "mode": "none"
+              "mode": "normal"
             },
             "thresholdsStyle": {
               "mode": "off"
@@ -297,10 +297,10 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 8,
+        "h": 7,
         "w": 12,
         "x": 0,
-        "y": 8
+        "y": 6
       },
       "id": 61,
       "options": {
@@ -320,12 +320,12 @@
             "type": "loki",
             "uid": "P982945308D3682D1"
           },
-          "expr": "rate({job=\"systemd-journal\", unit=\"docker.service\"} |~ \"(?i)error\"[1m])",
+          "expr": "rate(({job=\"systemd-journal\", unit=\"docker.service\"} |~ \"(?i)level=error\" !~ \"(?i)level=info\")[1m])",
           "legendFormat": "{{container_name}}",
           "refId": "A"
         }
       ],
-      "title": "Container Logs Errors",
+      "title": "Container Logs Error Rate",
       "type": "timeseries"
     },
     {
@@ -385,10 +385,10 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 8,
+        "h": 7,
         "w": 12,
         "x": 12,
-        "y": 8
+        "y": 6
       },
       "id": 62,
       "options": {
@@ -408,12 +408,12 @@
             "type": "loki",
             "uid": "P982945308D3682D1"
           },
-          "expr": "rate({job=\"systemd-journal\", unit=\"docker.service\"} |~ \"(?i)warn\"[1m])",
+          "expr": "rate(({job=\"systemd-journal\", unit=\"docker.service\"} |~ \"(?i)level=warn\" !~ \"(?i)level=info\")[1m])",
           "legendFormat": "{{container_name}}",
           "refId": "A"
         }
       ],
-      "title": "Container Logs Warnings",
+      "title": "Container Logs Warnings Rate",
       "type": "timeseries"
     },
     {
@@ -422,10 +422,10 @@
         "uid": "P982945308D3682D1"
       },
       "gridPos": {
-        "h": 8,
+        "h": 7,
         "w": 12,
         "x": 0,
-        "y": 16
+        "y": 13
       },
       "id": 59,
       "options": {
@@ -444,7 +444,7 @@
             "type": "loki",
             "uid": "P982945308D3682D1"
           },
-          "expr": "{job=\"systemd-journal\", unit=\"docker.service\"} |~ \"(?i)level=error\"",
+          "expr": "{job=\"systemd-journal\", unit=\"docker.service\"} | logfmt | level=\"error\"",
           "refId": "A"
         }
       ],
@@ -458,10 +458,10 @@
       },
       "description": "",
       "gridPos": {
-        "h": 8,
+        "h": 7,
         "w": 12,
         "x": 12,
-        "y": 16
+        "y": 13
       },
       "id": 63,
       "options": {
@@ -480,7 +480,7 @@
             "type": "loki",
             "uid": "P982945308D3682D1"
           },
-          "expr": "{job=\"systemd-journal\", unit=\"docker.service\"} |~ \"(?i)level=warn\"",
+          "expr": "{job=\"systemd-journal\", unit=\"docker.service\"} | logfmt | level=\"warn\"",
           "refId": "A"
         }
       ],
@@ -545,10 +545,10 @@
         ]
       },
       "gridPos": {
-        "h": 10,
+        "h": 9,
         "w": 6,
         "x": 0,
-        "y": 24
+        "y": 20
       },
       "id": 56,
       "options": {
@@ -570,7 +570,7 @@
             "uid": "P1809F7CD0C75ACF3"
           },
           "exemplar": false,
-          "expr": "sort_desc((container_cpu_load_average_10s / container_spec_cpu_shares + on(name) container_cpu_load_average_10s / container_spec_cpu_shares) / 2)",
+          "expr": "sort_desc((container_cpu_load_average_10s{id=~\"^/docker.*\"} / container_spec_cpu_shares + on(name) container_cpu_load_average_10s{id=~\"^/docker.*\"} / container_spec_cpu_shares) / 2)",
           "format": "table",
           "instant": true,
           "interval": "",
@@ -578,7 +578,7 @@
           "refId": "A"
         }
       ],
-      "title": "CPU Utilization",
+      "title": "Container CPU Utilization",
       "type": "table"
     },
     {
@@ -663,10 +663,10 @@
         ]
       },
       "gridPos": {
-        "h": 10,
+        "h": 9,
         "w": 6,
         "x": 6,
-        "y": 24
+        "y": 20
       },
       "id": 57,
       "options": {
@@ -696,7 +696,7 @@
           "refId": "A"
         }
       ],
-      "title": "Memory Usage",
+      "title": "Container Memory Usage",
       "type": "table"
     },
     {
@@ -755,12 +755,12 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 10,
+        "h": 9,
         "w": 12,
         "x": 12,
-        "y": 24
+        "y": 20
       },
-      "id": 38,
+      "id": 48,
       "options": {
         "legend": {
           "calcs": [],
@@ -779,13 +779,13 @@
             "uid": "P1809F7CD0C75ACF3"
           },
           "exemplar": true,
-          "expr": "swarm_manager_tasks_total",
+          "expr": "container_cpu_load_average_10s / container_spec_cpu_shares",
           "interval": "",
-          "legendFormat": "{{state}}",
+          "legendFormat": "{{name}}",
           "refId": "A"
         }
       ],
-      "title": "Swarm Task State",
+      "title": "Container CPU Utilization",
       "type": "timeseries"
     },
     {
@@ -839,7 +839,188 @@
                 "value": 80
               }
             ]
-          }
+          },
+          "unit": "decmbytes"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 9,
+        "w": 12,
+        "x": 0,
+        "y": 29
+      },
+      "id": 50,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "P1809F7CD0C75ACF3"
+          },
+          "exemplar": true,
+          "expr": "container_memory_rss{id=~\"^/docker/.*\"} / 1e6",
+          "interval": "",
+          "legendFormat": "{{name}}",
+          "refId": "A"
+        }
+      ],
+      "title": "Container Memory RSS",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "P1809F7CD0C75ACF3"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "decmbytes"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 9,
+        "w": 12,
+        "x": 12,
+        "y": 29
+      },
+      "id": 54,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "P1809F7CD0C75ACF3"
+          },
+          "exemplar": true,
+          "expr": "container_memory_usage_bytes{id=~\"^/docker/.*\"} / 1e6",
+          "interval": "",
+          "legendFormat": "{{name}}",
+          "refId": "A"
+        }
+      ],
+      "title": "Container Memory Usage",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "P1809F7CD0C75ACF3"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "Bps"
         },
         "overrides": []
       },
@@ -847,7 +1028,7 @@
         "h": 10,
         "w": 12,
         "x": 0,
-        "y": 34
+        "y": 38
       },
       "id": 52,
       "options": {
@@ -945,12 +1126,12 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 10,
+        "h": 9,
         "w": 12,
         "x": 12,
-        "y": 34
+        "y": 38
       },
-      "id": 48,
+      "id": 38,
       "options": {
         "legend": {
           "calcs": [],
@@ -969,13 +1150,13 @@
             "uid": "P1809F7CD0C75ACF3"
           },
           "exemplar": true,
-          "expr": "container_cpu_load_average_10s / container_spec_cpu_shares",
+          "expr": "swarm_manager_tasks_total",
           "interval": "",
-          "legendFormat": "{{name}}",
+          "legendFormat": "{{state}}",
           "refId": "A"
         }
       ],
-      "title": "Container CPU Utilization",
+      "title": "Swarm Task State",
       "type": "timeseries"
     },
     {
@@ -1017,6 +1198,8 @@
             }
           },
           "mappings": [],
+          "max": 1,
+          "min": 0,
           "thresholds": {
             "mode": "absolute",
             "steps": [
@@ -1034,101 +1217,12 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 9,
-        "w": 12,
-        "x": 0,
-        "y": 44
-      },
-      "id": 50,
-      "options": {
-        "legend": {
-          "calcs": [],
-          "displayMode": "list",
-          "placement": "bottom"
-        },
-        "tooltip": {
-          "mode": "single",
-          "sort": "none"
-        }
-      },
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "P1809F7CD0C75ACF3"
-          },
-          "exemplar": true,
-          "expr": "container_memory_rss > 0",
-          "interval": "",
-          "legendFormat": "{{name}}",
-          "refId": "A"
-        }
-      ],
-      "title": "Container Memory RSS",
-      "type": "timeseries"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "P1809F7CD0C75ACF3"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "palette-classic"
-          },
-          "custom": {
-            "axisLabel": "",
-            "axisPlacement": "auto",
-            "barAlignment": 0,
-            "drawStyle": "line",
-            "fillOpacity": 0,
-            "gradientMode": "none",
-            "hideFrom": {
-              "legend": false,
-              "tooltip": false,
-              "viz": false
-            },
-            "lineInterpolation": "linear",
-            "lineWidth": 1,
-            "pointSize": 5,
-            "scaleDistribution": {
-              "type": "linear"
-            },
-            "showPoints": "auto",
-            "spanNulls": false,
-            "stacking": {
-              "group": "A",
-              "mode": "none"
-            },
-            "thresholdsStyle": {
-              "mode": "off"
-            }
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          }
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 9,
+        "h": 8,
         "w": 12,
         "x": 12,
-        "y": 44
+        "y": 47
       },
-      "id": 54,
+      "id": 16,
       "options": {
         "legend": {
           "calcs": [],
@@ -1147,13 +1241,13 @@
             "uid": "P1809F7CD0C75ACF3"
           },
           "exemplar": true,
-          "expr": "container_memory_usage_bytes / container_spec_memory_limit_bytes",
+          "expr": "1 - node_filesystem_avail_bytes / node_filesystem_size_bytes",
           "interval": "",
-          "legendFormat": "{{name}}",
+          "legendFormat": "{{instance}}-{{mountpoint}}",
           "refId": "A"
         }
       ],
-      "title": "Container Memory Utilization",
+      "title": "Filesystem Utilization",
       "type": "timeseries"
     },
     {
@@ -1187,7 +1281,7 @@
         "h": 8,
         "w": 3,
         "x": 0,
-        "y": 53
+        "y": 48
       },
       "id": 30,
       "options": {
@@ -1295,7 +1389,7 @@
         "h": 8,
         "w": 9,
         "x": 3,
-        "y": 53
+        "y": 48
       },
       "id": 28,
       "options": {
@@ -1394,9 +1488,9 @@
         "h": 8,
         "w": 12,
         "x": 12,
-        "y": 53
+        "y": 55
       },
-      "id": 16,
+      "id": 14,
       "options": {
         "legend": {
           "calcs": [],
@@ -1415,13 +1509,13 @@
             "uid": "P1809F7CD0C75ACF3"
           },
           "exemplar": true,
-          "expr": "1 - node_filesystem_avail_bytes / node_filesystem_size_bytes",
+          "expr": "node_memory_MemFree_bytes / node_memory_MemTotal_bytes",
           "interval": "",
-          "legendFormat": "{{instance}}-{{mountpoint}}",
+          "legendFormat": "{{instance}}",
           "refId": "A"
         }
       ],
-      "title": "Filesystem Utilization",
+      "title": "Memory Utilization",
       "type": "timeseries"
     },
     {
@@ -1485,7 +1579,7 @@
         "h": 8,
         "w": 12,
         "x": 0,
-        "y": 61
+        "y": 56
       },
       "id": 12,
       "options": {
@@ -1554,8 +1648,6 @@
             }
           },
           "mappings": [],
-          "max": 1,
-          "min": 0,
           "thresholds": {
             "mode": "absolute",
             "steps": [
@@ -1568,7 +1660,8 @@
                 "value": 80
               }
             ]
-          }
+          },
+          "unit": "deckbytes"
         },
         "overrides": []
       },
@@ -1576,9 +1669,9 @@
         "h": 8,
         "w": 12,
         "x": 12,
-        "y": 61
+        "y": 63
       },
-      "id": 14,
+      "id": 22,
       "options": {
         "legend": {
           "calcs": [],
@@ -1597,13 +1690,26 @@
             "uid": "P1809F7CD0C75ACF3"
           },
           "exemplar": true,
-          "expr": "node_memory_MemFree_bytes / node_memory_MemTotal_bytes",
+          "expr": "rate(node_disk_read_bytes_total[1m]) / 1000",
+          "hide": false,
           "interval": "",
-          "legendFormat": "{{instance}}",
+          "legendFormat": "read-{{instance}}-{{device}}",
           "refId": "A"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "P1809F7CD0C75ACF3"
+          },
+          "exemplar": true,
+          "expr": "- rate(node_disk_written_bytes_total[1m]) / 1000",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "write-{{instance}}-{{device}}",
+          "refId": "B"
         }
       ],
-      "title": "Memory Utilization",
+      "title": "HDD R/W (KB)",
       "type": "timeseries"
     },
     {
@@ -1667,7 +1773,7 @@
         "h": 8,
         "w": 12,
         "x": 0,
-        "y": 69
+        "y": 64
       },
       "id": 18,
       "options": {
@@ -1710,224 +1816,6 @@
       "type": "timeseries"
     },
     {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "P1809F7CD0C75ACF3"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "palette-classic"
-          },
-          "custom": {
-            "axisLabel": "",
-            "axisPlacement": "auto",
-            "barAlignment": 0,
-            "drawStyle": "line",
-            "fillOpacity": 0,
-            "gradientMode": "none",
-            "hideFrom": {
-              "legend": false,
-              "tooltip": false,
-              "viz": false
-            },
-            "lineInterpolation": "linear",
-            "lineWidth": 1,
-            "pointSize": 5,
-            "scaleDistribution": {
-              "type": "linear"
-            },
-            "showPoints": "auto",
-            "spanNulls": false,
-            "stacking": {
-              "group": "A",
-              "mode": "none"
-            },
-            "thresholdsStyle": {
-              "mode": "off"
-            }
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          },
-          "unit": "deckbytes"
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 8,
-        "w": 12,
-        "x": 12,
-        "y": 69
-      },
-      "id": 22,
-      "options": {
-        "legend": {
-          "calcs": [],
-          "displayMode": "list",
-          "placement": "bottom"
-        },
-        "tooltip": {
-          "mode": "single",
-          "sort": "none"
-        }
-      },
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "P1809F7CD0C75ACF3"
-          },
-          "exemplar": true,
-          "expr": "rate(node_disk_read_bytes_total[1m]) / 1000",
-          "hide": false,
-          "interval": "",
-          "legendFormat": "read-{{instance}}-{{device}}",
-          "refId": "A"
-        },
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "P1809F7CD0C75ACF3"
-          },
-          "exemplar": true,
-          "expr": "- rate(node_disk_written_bytes_total[1m]) / 1000",
-          "hide": false,
-          "interval": "",
-          "legendFormat": "write-{{instance}}-{{device}}",
-          "refId": "B"
-        }
-      ],
-      "title": "HDD R/W (KB)",
-      "type": "timeseries"
-    },
-    {
-      "aliasColors": {},
-      "bars": false,
-      "dashLength": 10,
-      "dashes": false,
-      "datasource": {
-        "type": "prometheus",
-        "uid": "P1809F7CD0C75ACF3"
-      },
-      "description": "",
-      "editable": true,
-      "error": false,
-      "fill": 1,
-      "fillGradient": 0,
-      "grid": {},
-      "gridPos": {
-        "h": 8,
-        "w": 12,
-        "x": 0,
-        "y": 77
-      },
-      "hiddenSeries": false,
-      "id": 6,
-      "legend": {
-        "avg": false,
-        "current": false,
-        "max": false,
-        "min": false,
-        "show": true,
-        "total": false,
-        "values": false
-      },
-      "libraryPanel": {
-        "description": "",
-        "meta": {
-          "connectedDashboards": 1,
-          "created": "2022-03-31T04:59:53Z",
-          "createdBy": {
-            "avatarUrl": "/avatar/46d229b033af06a191ff2267bca9ae56",
-            "id": 1,
-            "name": "admin"
-          },
-          "folderName": "General",
-          "folderUid": "",
-          "updated": "2022-03-31T05:05:45Z",
-          "updatedBy": {
-            "avatarUrl": "/avatar/46d229b033af06a191ff2267bca9ae56",
-            "id": 1,
-            "name": "admin"
-          }
-        },
-        "name": "Prometheus Scrape Duration",
-        "type": "graph",
-        "uid": "Vma8C1s7z",
-        "version": 2
-      },
-      "lines": true,
-      "linewidth": 2,
-      "links": [],
-      "nullPointMode": "connected",
-      "options": {
-        "alertThreshold": true
-      },
-      "percentage": false,
-      "pluginVersion": "8.4.4",
-      "pointradius": 5,
-      "points": false,
-      "renderer": "flot",
-      "seriesOverrides": [],
-      "spaceLength": 10,
-      "stack": false,
-      "steppedLine": false,
-      "targets": [
-        {
-          "expr": "prometheus_target_interval_length_seconds{quantile!=\"0.01\", quantile!=\"0.05\"}",
-          "interval": "",
-          "intervalFactor": 2,
-          "legendFormat": "{{quantile}} ({{interval}})",
-          "metric": "",
-          "refId": "A",
-          "step": 2
-        }
-      ],
-      "thresholds": [],
-      "timeRegions": [],
-      "title": "Prometheus Scrape Duration",
-      "tooltip": {
-        "msResolution": false,
-        "ordering": "alphabetical",
-        "shared": true,
-        "sort": 0,
-        "value_type": "cumulative"
-      },
-      "type": "graph",
-      "xaxis": {
-        "mode": "time",
-        "show": true,
-        "values": []
-      },
-      "yaxes": [
-        {
-          "format": "short",
-          "logBase": 1,
-          "show": true
-        },
-        {
-          "format": "short",
-          "logBase": 1,
-          "show": true
-        }
-      ],
-      "yaxis": {
-        "align": false
-      }
-    },
-    {
       "aliasColors": {
         "prometheus": "#F9BA8F",
         "{instance=\"localhost:9090\",interval=\"5s\",job=\"prometheus\"}": "#F9BA8F"
@@ -1949,7 +1837,7 @@
         "h": 8,
         "w": 9,
         "x": 12,
-        "y": 77
+        "y": 71
       },
       "hiddenSeries": false,
       "id": 4,
@@ -2087,7 +1975,7 @@
         "h": 8,
         "w": 3,
         "x": 21,
-        "y": 77
+        "y": 71
       },
       "id": 2,
       "libraryPanel": {
@@ -2143,17 +2031,119 @@
       "type": "stat"
     },
     {
-      "collapsed": false,
-      "gridPos": {
-        "h": 1,
-        "w": 24,
-        "x": 0,
-        "y": 85
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": {
+        "type": "prometheus",
+        "uid": "P1809F7CD0C75ACF3"
       },
-      "id": 67,
-      "panels": [],
-      "title": "Cluster Instance Stats",
-      "type": "row"
+      "description": "",
+      "editable": true,
+      "error": false,
+      "fill": 1,
+      "fillGradient": 0,
+      "grid": {},
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 72
+      },
+      "hiddenSeries": false,
+      "id": 6,
+      "legend": {
+        "avg": false,
+        "current": false,
+        "max": false,
+        "min": false,
+        "show": true,
+        "total": false,
+        "values": false
+      },
+      "libraryPanel": {
+        "description": "",
+        "meta": {
+          "connectedDashboards": 1,
+          "created": "2022-03-31T04:59:53Z",
+          "createdBy": {
+            "avatarUrl": "/avatar/46d229b033af06a191ff2267bca9ae56",
+            "id": 1,
+            "name": "admin"
+          },
+          "folderName": "General",
+          "folderUid": "",
+          "updated": "2022-03-31T05:05:45Z",
+          "updatedBy": {
+            "avatarUrl": "/avatar/46d229b033af06a191ff2267bca9ae56",
+            "id": 1,
+            "name": "admin"
+          }
+        },
+        "name": "Prometheus Scrape Duration",
+        "type": "graph",
+        "uid": "Vma8C1s7z",
+        "version": 2
+      },
+      "lines": true,
+      "linewidth": 2,
+      "links": [],
+      "nullPointMode": "connected",
+      "options": {
+        "alertThreshold": true
+      },
+      "percentage": false,
+      "pluginVersion": "8.4.4",
+      "pointradius": 5,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "expr": "prometheus_target_interval_length_seconds{quantile!=\"0.01\", quantile!=\"0.05\"}",
+          "interval": "",
+          "intervalFactor": 2,
+          "legendFormat": "{{quantile}} ({{interval}})",
+          "metric": "",
+          "refId": "A",
+          "step": 2
+        }
+      ],
+      "thresholds": [],
+      "timeRegions": [],
+      "title": "Prometheus Scrape Duration",
+      "tooltip": {
+        "msResolution": false,
+        "ordering": "alphabetical",
+        "shared": true,
+        "sort": 0,
+        "value_type": "cumulative"
+      },
+      "type": "graph",
+      "xaxis": {
+        "mode": "time",
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "format": "short",
+          "logBase": 1,
+          "show": true
+        },
+        {
+          "format": "short",
+          "logBase": 1,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false
+      }
     }
   ],
   "schemaVersion": 35,
@@ -2163,7 +2153,7 @@
     "list": []
   },
   "time": {
-    "from": "now-6h",
+    "from": "now-1h",
     "to": "now"
   },
   "timepicker": {},
