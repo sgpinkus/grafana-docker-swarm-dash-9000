@@ -1,0 +1,68 @@
+---
+global:
+  scrape_interval: 15s # Set the scrape interval to every 15 seconds. Default is every 1 minute.
+  evaluation_interval: 15s # Evaluate rules every 15 seconds. The default is every 1 minute.
+  external_labels:
+    monitor: 'codelab-monitor'
+# Alertmanager configuration
+alerting:
+  alertmanagers:
+    - static_configs:
+        - targets:
+          # - alertmanager:9093
+# Load rules once and periodically evaluate them according to the global 'evaluation_interval'.
+rule_files:
+  - 'prometheus.rules.yml'
+# A scrape configuration containing exactly one endpoint to scrape:
+# Here it's Prometheus itself.
+scrape_configs:
+  # The job name is added as a label `job=<job_name>` to any timeseries scraped from this config.
+  - job_name: 'prometheus'
+    scrape_interval: 5s
+    static_configs:
+      - targets: ['localhost:9090']
+  - job_name: 'node'
+    scrape_interval: 5s
+    static_configs:
+      - targets: ['localhost:9100']
+        labels:
+          group: 'production'
+  - job_name: cadvisor
+    scrape_interval: 5s
+    static_configs:
+      - targets: ['localhost:8080']
+        labels:
+          group: 'production'
+  - job_name: 'docker' # According to docker docs -- https://docs.docker.com/config/daemon/prometheus/
+    static_configs:
+      - targets: ['localhost:9323']
+  # Only needed for dyn discovery of docker nodes and container published metrics targets.
+  # - job_name: 'dockerswarm_nodes' # According to prometheus docs --
+  #   dockerswarm_sd_configs:
+  #     - host: unix:///var/run/docker.sock
+  #       role: nodes
+  #     # - host: unix:///var/run/docker.sock
+  #     #   role: tasks
+  #   relabel_configs: # Fetch metrics on port 9323.
+  #     - source_labels: [__meta_dockerswarm_node_address]
+  #       target_label: __address__
+  #       replacement: $1:9323
+  #     - source_labels: [__meta_dockerswarm_node_hostname] # Set hostname as instance label
+  #       target_label: instance
+  # Create a job to auto discover metrics end points published by Docker Swarm containers.
+  # - job_name: 'dockerswarm_tasks'
+  #   dockerswarm_sd_configs:
+  #     - host: unix:///var/run/docker.sock
+  #       role: tasks
+  #   relabel_configs:
+  #     # Only keep containers that should be running.
+  #     - source_labels: [__meta_dockerswarm_task_desired_state]
+  #       regex: running
+  #       action: keep
+  #     # Only keep containers that have a `prometheus-job` label.
+  #     - source_labels: [__meta_dockerswarm_service_label_prometheus_job]
+  #       regex: .+
+  #       action: keep
+  #     # Use the prometheus-job Swarm label as Prometheus job label.
+  #     - source_labels: [__meta_dockerswarm_service_label_prometheus_job]
+  #       target_label: job

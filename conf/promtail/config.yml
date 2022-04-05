@@ -1,0 +1,31 @@
+server:
+  http_listen_port: 9080
+  grpc_listen_port: 0
+positions:
+  filename: /tmp/positions.yaml
+clients:
+  - url: http://127.0.0.1:3100/loki/api/v1/push
+scrape_configs:
+  - job_name: journal # https://grafana.com/docs/loki/latest/clients/promtail/scraping/#journal-scraping-linux-only
+    journal:
+      json: false
+      max_age: 12h
+      path: /journal
+      labels:
+        job: systemd-journal
+    relabel_configs: # https://grafana.com/docs/loki/latest/fundamentals/labels/
+      - source_labels: [__journal__systemd_unit]
+        target_label: unit
+      - source_labels: [__journal__hostname]
+        target_label: nodename
+      - source_labels: [__journal_syslog_identifier]
+        target_label: syslog_identifier
+      - source_labels: [__journal__hostname]
+        target_label: nodename
+      - source_labels: [__journal_syslog_identifier]
+        target_label: syslog_identifier
+      - source_labels: [__journal_container_name]
+        target_label: container_name
+        # This crashes loki 
+        # - action: labelmap
+        #   regex: __journal_(.+)
