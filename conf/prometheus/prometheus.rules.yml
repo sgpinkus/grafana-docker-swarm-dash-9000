@@ -1,8 +1,10 @@
 groups:
 - name: cpu-node
   rules:
-  - record: job_instance_mode:node_cpu_seconds:avg_rate5m
-    expr: avg by (job, instance, mode) (rate(node_cpu_seconds_total[5m]))
+  - record: instance_mode:node_cpu_seconds:avg_rate1m
+    expr: avg by (instance, mode) (rate(node_cpu_seconds_total{mode!="idle"}[5m]))
+  - record: instance:node_cpu_seconds:avg_rate1m
+    expr: sum(sum(irate(node_cpu_seconds_total {mode!="idle"} [1m])) without (cpu) / count(node_cpu_seconds_total) without(cpu)) without(mode)
 - name: containers
   rules:
   - record: container:was_running

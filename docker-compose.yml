@@ -67,3 +67,8 @@ services:
     command: --config.file=/etc/promtail/config.yml
     # ports:
     #   - 9080:9080
+  app:
+    image: my-app:latest
+    build:
+      context: app/
+    network_mode: host
