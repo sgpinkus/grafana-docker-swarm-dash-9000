@@ -66,4 +66,4 @@ services:
     network_mode: host
     command: --config.file=/etc/promtail/config.yml
     # ports:
-    #   - 3100:3100
+    #   - 9080:9080
