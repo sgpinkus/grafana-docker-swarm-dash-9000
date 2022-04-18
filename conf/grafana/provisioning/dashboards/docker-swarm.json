@@ -26,6 +26,19 @@
   "liveNow": false,
   "panels": [
     {
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 0
+      },
+      "id": 74,
+      "panels": [],
+      "title": "Docker Swarm",
+      "type": "row"
+    },
+    {
       "datasource": {
         "type": "prometheus",
         "uid": "P1809F7CD0C75ACF3"
@@ -52,7 +65,7 @@
         "h": 6,
         "w": 8,
         "x": 0,
-        "y": 0
+        "y": 1
       },
       "id": 34,
       "options": {
@@ -117,7 +130,7 @@
         "h": 6,
         "w": 8,
         "x": 8,
-        "y": 0
+        "y": 1
       },
       "id": 42,
       "options": {
@@ -182,7 +195,7 @@
         "h": 6,
         "w": 8,
         "x": 16,
-        "y": 0
+        "y": 1
       },
       "id": 36,
       "options": {
@@ -242,499 +255,6 @@
     },
     {
       "datasource": {
-        "type": "loki",
-        "uid": "P982945308D3682D1"
-      },
-      "description": "",
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "palette-classic"
-          },
-          "custom": {
-            "axisLabel": "",
-            "axisPlacement": "auto",
-            "barAlignment": 0,
-            "drawStyle": "bars",
-            "fillOpacity": 25,
-            "gradientMode": "none",
-            "hideFrom": {
-              "legend": false,
-              "tooltip": false,
-              "viz": false
-            },
-            "lineInterpolation": "linear",
-            "lineWidth": 1,
-            "pointSize": 5,
-            "scaleDistribution": {
-              "type": "linear"
-            },
-            "showPoints": "auto",
-            "spanNulls": false,
-            "stacking": {
-              "group": "A",
-              "mode": "normal"
-            },
-            "thresholdsStyle": {
-              "mode": "off"
-            }
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          }
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 7,
-        "w": 12,
-        "x": 0,
-        "y": 6
-      },
-      "id": 65,
-      "options": {
-        "legend": {
-          "calcs": [],
-          "displayMode": "list",
-          "placement": "bottom"
-        },
-        "tooltip": {
-          "mode": "single",
-          "sort": "none"
-        }
-      },
-      "targets": [
-        {
-          "datasource": {
-            "type": "loki",
-            "uid": "P982945308D3682D1"
-          },
-          "expr": "count_over_time({job=\"systemd-journal\", unit=\"docker.service\", container_name=\"prometheus-test-stack-1_app_1\"} |~ \"^http:\" | pattern `http: <ip> - - <_> \"<method> <uri> <_>\" <status> <size> <_> \"<agent>\" <_>`| status=~\"5[0-9][0-9]\"[1m])",
-          "legendFormat": "{{container_name}}",
-          "refId": "A"
-        }
-      ],
-      "title": "HTTP Application 5xx Log Rate",
-      "type": "timeseries"
-    },
-    {
-      "datasource": {
-        "type": "loki",
-        "uid": "P982945308D3682D1"
-      },
-      "description": "",
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "palette-classic"
-          },
-          "custom": {
-            "axisLabel": "",
-            "axisPlacement": "auto",
-            "barAlignment": 0,
-            "drawStyle": "bars",
-            "fillOpacity": 25,
-            "gradientMode": "none",
-            "hideFrom": {
-              "legend": false,
-              "tooltip": false,
-              "viz": false
-            },
-            "lineInterpolation": "linear",
-            "lineWidth": 1,
-            "pointSize": 5,
-            "scaleDistribution": {
-              "type": "linear"
-            },
-            "showPoints": "auto",
-            "spanNulls": false,
-            "stacking": {
-              "group": "A",
-              "mode": "normal"
-            },
-            "thresholdsStyle": {
-              "mode": "off"
-            }
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          }
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 7,
-        "w": 12,
-        "x": 12,
-        "y": 6
-      },
-      "id": 68,
-      "options": {
-        "legend": {
-          "calcs": [],
-          "displayMode": "list",
-          "placement": "bottom"
-        },
-        "tooltip": {
-          "mode": "single",
-          "sort": "none"
-        }
-      },
-      "targets": [
-        {
-          "datasource": {
-            "type": "loki",
-            "uid": "P982945308D3682D1"
-          },
-          "expr": "count_over_time({job=\"systemd-journal\", unit=\"docker.service\", container_name=\"prometheus-test-stack-1_app_1\"} |~ \"^error:\"[1m])",
-          "legendFormat": "{{container_name}}",
-          "refId": "A"
-        }
-      ],
-      "title": "Application Error Log Rate",
-      "type": "timeseries"
-    },
-    {
-      "datasource": {
-        "type": "loki",
-        "uid": "P982945308D3682D1"
-      },
-      "gridPos": {
-        "h": 7,
-        "w": 12,
-        "x": 0,
-        "y": 13
-      },
-      "id": 64,
-      "options": {
-        "dedupStrategy": "none",
-        "enableLogDetails": true,
-        "prettifyLogMessage": false,
-        "showCommonLabels": false,
-        "showLabels": false,
-        "showTime": false,
-        "sortOrder": "Descending",
-        "wrapLogMessage": false
-      },
-      "targets": [
-        {
-          "datasource": {
-            "type": "loki",
-            "uid": "P982945308D3682D1"
-          },
-          "expr": "{job=\"systemd-journal\", unit=\"docker.service\", container_name=\"prometheus-test-stack-1_app_1\"} |~ \"^http:\" | pattern `http: <ip> - - <_> \"<method> <uri> <_>\" <status> <size> <_> \"<agent>\" <_>`| status=~\"5[0-9][0-9]\"",
-          "refId": "A"
-        }
-      ],
-      "title": "Latest HTTP Application 5xx Logs",
-      "type": "logs"
-    },
-    {
-      "datasource": {
-        "type": "loki",
-        "uid": "P982945308D3682D1"
-      },
-      "gridPos": {
-        "h": 7,
-        "w": 12,
-        "x": 12,
-        "y": 13
-      },
-      "id": 67,
-      "options": {
-        "dedupStrategy": "none",
-        "enableLogDetails": true,
-        "prettifyLogMessage": false,
-        "showCommonLabels": false,
-        "showLabels": false,
-        "showTime": false,
-        "sortOrder": "Descending",
-        "wrapLogMessage": false
-      },
-      "targets": [
-        {
-          "datasource": {
-            "type": "loki",
-            "uid": "P982945308D3682D1"
-          },
-          "expr": "{job=\"systemd-journal\", unit=\"docker.service\", container_name=\"prometheus-test-stack-1_app_1\"} |~ \"^error:\"",
-          "refId": "A"
-        }
-      ],
-      "title": "Latest Application Error Logs",
-      "type": "logs"
-    },
-    {
-      "datasource": {
-        "type": "loki",
-        "uid": "P982945308D3682D1"
-      },
-      "description": "",
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "palette-classic"
-          },
-          "custom": {
-            "axisLabel": "",
-            "axisPlacement": "auto",
-            "barAlignment": 0,
-            "drawStyle": "bars",
-            "fillOpacity": 25,
-            "gradientMode": "none",
-            "hideFrom": {
-              "legend": false,
-              "tooltip": false,
-              "viz": false
-            },
-            "lineInterpolation": "linear",
-            "lineWidth": 1,
-            "pointSize": 5,
-            "scaleDistribution": {
-              "type": "linear"
-            },
-            "showPoints": "auto",
-            "spanNulls": false,
-            "stacking": {
-              "group": "A",
-              "mode": "normal"
-            },
-            "thresholdsStyle": {
-              "mode": "off"
-            }
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          }
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 7,
-        "w": 12,
-        "x": 0,
-        "y": 20
-      },
-      "id": 61,
-      "options": {
-        "legend": {
-          "calcs": [],
-          "displayMode": "list",
-          "placement": "bottom"
-        },
-        "tooltip": {
-          "mode": "single",
-          "sort": "none"
-        }
-      },
-      "targets": [
-        {
-          "datasource": {
-            "type": "loki",
-            "uid": "P982945308D3682D1"
-          },
-          "expr": "count_over_time({job=\"systemd-journal\", unit=\"docker.service\"} | logfmt | level=\"error\" [30s])",
-          "legendFormat": "{{container_name}}",
-          "refId": "A"
-        }
-      ],
-      "title": "Container Logfmt Error Log Rate",
-      "type": "timeseries"
-    },
-    {
-      "datasource": {
-        "type": "loki",
-        "uid": "P982945308D3682D1"
-      },
-      "description": "",
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "palette-classic"
-          },
-          "custom": {
-            "axisLabel": "",
-            "axisPlacement": "auto",
-            "barAlignment": 0,
-            "drawStyle": "bars",
-            "fillOpacity": 25,
-            "gradientMode": "none",
-            "hideFrom": {
-              "legend": false,
-              "tooltip": false,
-              "viz": false
-            },
-            "lineInterpolation": "linear",
-            "lineWidth": 1,
-            "pointSize": 5,
-            "scaleDistribution": {
-              "type": "linear"
-            },
-            "showPoints": "auto",
-            "spanNulls": false,
-            "stacking": {
-              "group": "A",
-              "mode": "normal"
-            },
-            "thresholdsStyle": {
-              "mode": "off"
-            }
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          }
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 7,
-        "w": 12,
-        "x": 12,
-        "y": 20
-      },
-      "id": 66,
-      "options": {
-        "legend": {
-          "calcs": [],
-          "displayMode": "list",
-          "placement": "bottom"
-        },
-        "tooltip": {
-          "mode": "single",
-          "sort": "none"
-        }
-      },
-      "targets": [
-        {
-          "datasource": {
-            "type": "loki",
-            "uid": "P982945308D3682D1"
-          },
-          "expr": "count_over_time({job=\"systemd-journal\", unit=\"docker.service\"} | logfmt | level=\"warn\" [30s])",
-          "legendFormat": "{{container_name}}",
-          "refId": "A"
-        }
-      ],
-      "title": "Container Logfmt Logs Warning Rate",
-      "type": "timeseries"
-    },
-    {
-      "datasource": {
-        "type": "loki",
-        "uid": "P982945308D3682D1"
-      },
-      "gridPos": {
-        "h": 7,
-        "w": 12,
-        "x": 0,
-        "y": 27
-      },
-      "id": 59,
-      "options": {
-        "dedupStrategy": "none",
-        "enableLogDetails": true,
-        "prettifyLogMessage": false,
-        "showCommonLabels": false,
-        "showLabels": false,
-        "showTime": false,
-        "sortOrder": "Descending",
-        "wrapLogMessage": false
-      },
-      "targets": [
-        {
-          "datasource": {
-            "type": "loki",
-            "uid": "P982945308D3682D1"
-          },
-          "expr": "{job=\"systemd-journal\", unit=\"docker.service\"} | logfmt | level=\"error\"",
-          "refId": "A"
-        }
-      ],
-      "title": "Latest Container Logfmt Error Logs",
-      "type": "logs"
-    },
-    {
-      "datasource": {
-        "type": "loki",
-        "uid": "P982945308D3682D1"
-      },
-      "description": "",
-      "gridPos": {
-        "h": 7,
-        "w": 12,
-        "x": 12,
-        "y": 27
-      },
-      "id": 63,
-      "options": {
-        "dedupStrategy": "none",
-        "enableLogDetails": true,
-        "prettifyLogMessage": false,
-        "showCommonLabels": false,
-        "showLabels": false,
-        "showTime": false,
-        "sortOrder": "Descending",
-        "wrapLogMessage": false
-      },
-      "targets": [
-        {
-          "datasource": {
-            "type": "loki",
-            "uid": "P982945308D3682D1"
-          },
-          "expr": "{job=\"systemd-journal\", unit=\"docker.service\"} | logfmt | level=\"warn\"",
-          "refId": "A"
-        }
-      ],
-      "title": "Latest Container LogFmt Warning Logs",
-      "type": "logs"
-    },
-    {
-      "datasource": {
         "type": "prometheus",
         "uid": "P1809F7CD0C75ACF3"
       },
@@ -791,10 +311,10 @@
         ]
       },
       "gridPos": {
-        "h": 9,
+        "h": 10,
         "w": 6,
         "x": 0,
-        "y": 34
+        "y": 7
       },
       "id": 56,
       "options": {
@@ -816,7 +336,7 @@
             "uid": "P1809F7CD0C75ACF3"
           },
           "exemplar": false,
-          "expr": "sort_desc((container_cpu_load_average_10s / container_spec_cpu_shares + on(name) container_cpu_load_average_10s / container_spec_cpu_shares) / 2)",
+          "expr": "sort_desc(rate(container_cpu_user_seconds_total{id=~\".*docker.*\"} [1m]))",
           "format": "table",
           "instant": true,
           "interval": "",
@@ -825,6 +345,16 @@
         }
       ],
       "title": "Container CPU Utilization",
+      "transformations": [
+        {
+          "id": "filterFieldsByName",
+          "options": {
+            "include": {
+              "pattern": "^(name|Value)$"
+            }
+          }
+        }
+      ],
       "type": "table"
     },
     {
@@ -855,7 +385,8 @@
                 "value": 80
               }
             ]
-          }
+          },
+          "unit": "decmbytes"
         },
         "overrides": [
           {
@@ -909,10 +440,10 @@
         ]
       },
       "gridPos": {
-        "h": 9,
+        "h": 10,
         "w": 6,
         "x": 6,
-        "y": 34
+        "y": 7
       },
       "id": 57,
       "options": {
@@ -934,7 +465,7 @@
             "uid": "P1809F7CD0C75ACF3"
           },
           "exemplar": false,
-          "expr": "sort_desc((container_memory_usage_bytes + on(name) container_memory_usage_bytes) / 2) # This is X + on(..) X / 2 is simplest way I know to project a PromQL stage ..",
+          "expr": "sort_desc(container_memory_usage_bytes{id=~\".*docker.*\"} / 2^20)",
           "format": "table",
           "instant": true,
           "interval": "",
@@ -943,6 +474,16 @@
         }
       ],
       "title": "Container Memory Usage",
+      "transformations": [
+        {
+          "id": "filterFieldsByName",
+          "options": {
+            "include": {
+              "pattern": "^(name|Value)$"
+            }
+          }
+        }
+      ],
       "type": "table"
     },
     {
@@ -1001,12 +542,12 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 9,
+        "h": 10,
         "w": 12,
         "x": 12,
-        "y": 34
+        "y": 7
       },
-      "id": 48,
+      "id": 38,
       "options": {
         "legend": {
           "calcs": [],
@@ -1025,13 +566,13 @@
             "uid": "P1809F7CD0C75ACF3"
           },
           "exemplar": true,
-          "expr": "container_cpu_load_average_10s / container_spec_cpu_shares",
+          "expr": "engine_daemon_container_states_containers",
           "interval": "",
-          "legendFormat": "{{name}}",
+          "legendFormat": "{{state}}",
           "refId": "A"
         }
       ],
-      "title": "Container CPU Utilization",
+      "title": "Container State",
       "type": "timeseries"
     },
     {
@@ -1094,7 +635,7 @@
         "h": 9,
         "w": 12,
         "x": 0,
-        "y": 43
+        "y": 17
       },
       "id": 50,
       "options": {
@@ -1115,7 +656,7 @@
             "uid": "P1809F7CD0C75ACF3"
           },
           "exemplar": true,
-          "expr": "container_memory_rss / 2^20",
+          "expr": "container_memory_rss{id=~\".*docker.*\"} / 2^20",
           "interval": "",
           "legendFormat": "{{name}}",
           "refId": "A"
@@ -1176,7 +717,7 @@
               }
             ]
           },
-          "unit": "decmbytes"
+          "unit": "percent"
         },
         "overrides": []
       },
@@ -1184,9 +725,9 @@
         "h": 9,
         "w": 12,
         "x": 12,
-        "y": 43
+        "y": 17
       },
-      "id": 54,
+      "id": 48,
       "options": {
         "legend": {
           "calcs": [],
@@ -1205,13 +746,13 @@
             "uid": "P1809F7CD0C75ACF3"
           },
           "exemplar": true,
-          "expr": "container_memory_usage_bytes / 2^20",
+          "expr": "rate(container_cpu_user_seconds_total{id=~\".*docker.*\"} [1m]) * 100",
           "interval": "",
           "legendFormat": "{{name}}",
           "refId": "A"
         }
       ],
-      "title": "Container Memory Usage",
+      "title": "Container CPU Utilization",
       "type": "timeseries"
     },
     {
@@ -1274,7 +815,7 @@
         "h": 10,
         "w": 12,
         "x": 0,
-        "y": 52
+        "y": 26
       },
       "id": 52,
       "options": {
@@ -1367,7 +908,8 @@
                 "value": 80
               }
             ]
-          }
+          },
+          "unit": "decmbytes"
         },
         "overrides": []
       },
@@ -1375,9 +917,9 @@
         "h": 9,
         "w": 12,
         "x": 12,
-        "y": 52
+        "y": 26
       },
-      "id": 38,
+      "id": 54,
       "options": {
         "legend": {
           "calcs": [],
@@ -1396,105 +938,530 @@
             "uid": "P1809F7CD0C75ACF3"
           },
           "exemplar": true,
-          "expr": "swarm_manager_tasks_total",
+          "expr": "container_memory_usage_bytes{id=~\".*docker.*\"} / 2^20",
           "interval": "",
-          "legendFormat": "{{state}}",
+          "legendFormat": "{{name}}",
           "refId": "A"
         }
       ],
-      "title": "Swarm Task State",
+      "title": "Container Memory Usage",
       "type": "timeseries"
     },
     {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "P1809F7CD0C75ACF3"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "palette-classic"
-          },
-          "custom": {
-            "axisLabel": "",
-            "axisPlacement": "auto",
-            "barAlignment": 0,
-            "drawStyle": "line",
-            "fillOpacity": 0,
-            "gradientMode": "none",
-            "hideFrom": {
-              "legend": false,
-              "tooltip": false,
-              "viz": false
-            },
-            "lineInterpolation": "linear",
-            "lineWidth": 1,
-            "pointSize": 5,
-            "scaleDistribution": {
-              "type": "linear"
-            },
-            "showPoints": "auto",
-            "spanNulls": false,
-            "stacking": {
-              "group": "A",
-              "mode": "none"
-            },
-            "thresholdsStyle": {
-              "mode": "off"
-            }
-          },
-          "mappings": [],
-          "max": 1,
-          "min": 0,
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          }
-        },
-        "overrides": []
-      },
+      "collapsed": true,
       "gridPos": {
-        "h": 8,
-        "w": 12,
-        "x": 12,
-        "y": 61
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 36
       },
-      "id": 16,
-      "options": {
-        "legend": {
-          "calcs": [],
-          "displayMode": "list",
-          "placement": "bottom"
-        },
-        "tooltip": {
-          "mode": "single",
-          "sort": "none"
-        }
-      },
-      "targets": [
+      "id": 72,
+      "panels": [
         {
           "datasource": {
-            "type": "prometheus",
-            "uid": "P1809F7CD0C75ACF3"
+            "type": "loki",
+            "uid": "P982945308D3682D1"
           },
-          "exemplar": true,
-          "expr": "1 - node_filesystem_avail_bytes / node_filesystem_size_bytes",
-          "interval": "",
-          "legendFormat": "{{instance}}-{{mountpoint}}",
-          "refId": "A"
+          "gridPos": {
+            "h": 7,
+            "w": 12,
+            "x": 0,
+            "y": 1
+          },
+          "id": 64,
+          "options": {
+            "dedupStrategy": "none",
+            "enableLogDetails": true,
+            "prettifyLogMessage": false,
+            "showCommonLabels": false,
+            "showLabels": false,
+            "showTime": false,
+            "sortOrder": "Descending",
+            "wrapLogMessage": false
+          },
+          "targets": [
+            {
+              "datasource": {
+                "type": "loki",
+                "uid": "P982945308D3682D1"
+              },
+              "expr": "{job=\"systemd-journal\", unit=\"docker.service\", container_name=\"prometheus-test-stack-1_app_1\"} |~ \"^http:\" | pattern `http: <ip> - - <_> \"<method> <uri> <_>\" <status> <size> <_> \"<agent>\" <_>`| status=~\"5[0-9][0-9]\"",
+              "refId": "A"
+            }
+          ],
+          "title": "Latest HTTP Application 5xx Logs",
+          "type": "logs"
+        },
+        {
+          "datasource": {
+            "type": "loki",
+            "uid": "P982945308D3682D1"
+          },
+          "description": "",
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "palette-classic"
+              },
+              "custom": {
+                "axisLabel": "",
+                "axisPlacement": "auto",
+                "barAlignment": 0,
+                "drawStyle": "bars",
+                "fillOpacity": 25,
+                "gradientMode": "none",
+                "hideFrom": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                },
+                "lineInterpolation": "linear",
+                "lineWidth": 1,
+                "pointSize": 5,
+                "scaleDistribution": {
+                  "type": "linear"
+                },
+                "showPoints": "auto",
+                "spanNulls": false,
+                "stacking": {
+                  "group": "A",
+                  "mode": "normal"
+                },
+                "thresholdsStyle": {
+                  "mode": "off"
+                }
+              },
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green"
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              }
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 7,
+            "w": 12,
+            "x": 12,
+            "y": 1
+          },
+          "id": 68,
+          "options": {
+            "legend": {
+              "calcs": [],
+              "displayMode": "list",
+              "placement": "bottom"
+            },
+            "tooltip": {
+              "mode": "single",
+              "sort": "none"
+            }
+          },
+          "targets": [
+            {
+              "datasource": {
+                "type": "loki",
+                "uid": "P982945308D3682D1"
+              },
+              "expr": "count_over_time({job=\"systemd-journal\", unit=\"docker.service\", container_name=\"prometheus-test-stack-1_app_1\"} |~ \"^error:\"[1m])",
+              "legendFormat": "{{container_name}}",
+              "refId": "A"
+            }
+          ],
+          "title": "Application Error Log Rate",
+          "type": "timeseries"
+        },
+        {
+          "datasource": {
+            "type": "loki",
+            "uid": "P982945308D3682D1"
+          },
+          "description": "",
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "palette-classic"
+              },
+              "custom": {
+                "axisLabel": "",
+                "axisPlacement": "auto",
+                "barAlignment": 0,
+                "drawStyle": "bars",
+                "fillOpacity": 25,
+                "gradientMode": "none",
+                "hideFrom": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                },
+                "lineInterpolation": "linear",
+                "lineWidth": 1,
+                "pointSize": 5,
+                "scaleDistribution": {
+                  "type": "linear"
+                },
+                "showPoints": "auto",
+                "spanNulls": false,
+                "stacking": {
+                  "group": "A",
+                  "mode": "normal"
+                },
+                "thresholdsStyle": {
+                  "mode": "off"
+                }
+              },
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green"
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              }
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 7,
+            "w": 12,
+            "x": 0,
+            "y": 8
+          },
+          "id": 65,
+          "options": {
+            "legend": {
+              "calcs": [],
+              "displayMode": "list",
+              "placement": "bottom"
+            },
+            "tooltip": {
+              "mode": "single",
+              "sort": "none"
+            }
+          },
+          "targets": [
+            {
+              "datasource": {
+                "type": "loki",
+                "uid": "P982945308D3682D1"
+              },
+              "expr": "count_over_time({job=\"systemd-journal\", unit=\"docker.service\", container_name=\"prometheus-test-stack-1_app_1\"} |~ \"^http:\" | pattern `http: <ip> - - <_> \"<method> <uri> <_>\" <status> <size> <_> \"<agent>\" <_>`| status=~\"5[0-9][0-9]\"[1m])",
+              "legendFormat": "{{container_name}}",
+              "refId": "A"
+            }
+          ],
+          "title": "HTTP Application 5xx Log Rate",
+          "type": "timeseries"
+        },
+        {
+          "datasource": {
+            "type": "loki",
+            "uid": "P982945308D3682D1"
+          },
+          "gridPos": {
+            "h": 7,
+            "w": 12,
+            "x": 12,
+            "y": 8
+          },
+          "id": 67,
+          "options": {
+            "dedupStrategy": "none",
+            "enableLogDetails": true,
+            "prettifyLogMessage": false,
+            "showCommonLabels": false,
+            "showLabels": false,
+            "showTime": false,
+            "sortOrder": "Descending",
+            "wrapLogMessage": false
+          },
+          "targets": [
+            {
+              "datasource": {
+                "type": "loki",
+                "uid": "P982945308D3682D1"
+              },
+              "expr": "{job=\"systemd-journal\", unit=\"docker.service\", container_name=\"prometheus-test-stack-1_app_1\"} |~ \"^error:\"",
+              "refId": "A"
+            }
+          ],
+          "title": "Latest Application Error Logs",
+          "type": "logs"
+        },
+        {
+          "datasource": {
+            "type": "loki",
+            "uid": "P982945308D3682D1"
+          },
+          "description": "",
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "palette-classic"
+              },
+              "custom": {
+                "axisLabel": "",
+                "axisPlacement": "auto",
+                "barAlignment": 0,
+                "drawStyle": "bars",
+                "fillOpacity": 25,
+                "gradientMode": "none",
+                "hideFrom": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                },
+                "lineInterpolation": "linear",
+                "lineWidth": 1,
+                "pointSize": 5,
+                "scaleDistribution": {
+                  "type": "linear"
+                },
+                "showPoints": "auto",
+                "spanNulls": false,
+                "stacking": {
+                  "group": "A",
+                  "mode": "normal"
+                },
+                "thresholdsStyle": {
+                  "mode": "off"
+                }
+              },
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green"
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              }
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 7,
+            "w": 12,
+            "x": 0,
+            "y": 15
+          },
+          "id": 61,
+          "options": {
+            "legend": {
+              "calcs": [],
+              "displayMode": "list",
+              "placement": "bottom"
+            },
+            "tooltip": {
+              "mode": "single",
+              "sort": "none"
+            }
+          },
+          "targets": [
+            {
+              "datasource": {
+                "type": "loki",
+                "uid": "P982945308D3682D1"
+              },
+              "expr": "count_over_time({job=\"systemd-journal\", unit=\"docker.service\"} | logfmt | level=\"error\" [30s])",
+              "legendFormat": "{{container_name}}",
+              "refId": "A"
+            }
+          ],
+          "title": "Container Logfmt Error Log Rate",
+          "type": "timeseries"
+        },
+        {
+          "datasource": {
+            "type": "loki",
+            "uid": "P982945308D3682D1"
+          },
+          "description": "",
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "palette-classic"
+              },
+              "custom": {
+                "axisLabel": "",
+                "axisPlacement": "auto",
+                "barAlignment": 0,
+                "drawStyle": "bars",
+                "fillOpacity": 25,
+                "gradientMode": "none",
+                "hideFrom": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                },
+                "lineInterpolation": "linear",
+                "lineWidth": 1,
+                "pointSize": 5,
+                "scaleDistribution": {
+                  "type": "linear"
+                },
+                "showPoints": "auto",
+                "spanNulls": false,
+                "stacking": {
+                  "group": "A",
+                  "mode": "normal"
+                },
+                "thresholdsStyle": {
+                  "mode": "off"
+                }
+              },
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green"
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              }
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 7,
+            "w": 12,
+            "x": 12,
+            "y": 15
+          },
+          "id": 66,
+          "options": {
+            "legend": {
+              "calcs": [],
+              "displayMode": "list",
+              "placement": "bottom"
+            },
+            "tooltip": {
+              "mode": "single",
+              "sort": "none"
+            }
+          },
+          "targets": [
+            {
+              "datasource": {
+                "type": "loki",
+                "uid": "P982945308D3682D1"
+              },
+              "expr": "count_over_time({job=\"systemd-journal\", unit=\"docker.service\"} | logfmt | level=\"warn\" [30s])",
+              "legendFormat": "{{container_name}}",
+              "refId": "A"
+            }
+          ],
+          "title": "Container Logfmt Logs Warning Rate",
+          "type": "timeseries"
+        },
+        {
+          "datasource": {
+            "type": "loki",
+            "uid": "P982945308D3682D1"
+          },
+          "gridPos": {
+            "h": 7,
+            "w": 12,
+            "x": 0,
+            "y": 22
+          },
+          "id": 59,
+          "options": {
+            "dedupStrategy": "none",
+            "enableLogDetails": true,
+            "prettifyLogMessage": false,
+            "showCommonLabels": false,
+            "showLabels": false,
+            "showTime": false,
+            "sortOrder": "Descending",
+            "wrapLogMessage": false
+          },
+          "targets": [
+            {
+              "datasource": {
+                "type": "loki",
+                "uid": "P982945308D3682D1"
+              },
+              "expr": "{job=\"systemd-journal\", unit=\"docker.service\"} | logfmt | level=\"error\"",
+              "refId": "A"
+            }
+          ],
+          "title": "Latest Container Logfmt Error Logs",
+          "type": "logs"
+        },
+        {
+          "datasource": {
+            "type": "loki",
+            "uid": "P982945308D3682D1"
+          },
+          "description": "",
+          "gridPos": {
+            "h": 7,
+            "w": 12,
+            "x": 12,
+            "y": 22
+          },
+          "id": 63,
+          "options": {
+            "dedupStrategy": "none",
+            "enableLogDetails": true,
+            "prettifyLogMessage": false,
+            "showCommonLabels": false,
+            "showLabels": false,
+            "showTime": false,
+            "sortOrder": "Descending",
+            "wrapLogMessage": false
+          },
+          "targets": [
+            {
+              "datasource": {
+                "type": "loki",
+                "uid": "P982945308D3682D1"
+              },
+              "expr": "{job=\"systemd-journal\", unit=\"docker.service\"} | logfmt | level=\"warn\"",
+              "refId": "A"
+            }
+          ],
+          "title": "Latest Container LogFmt Warning Logs",
+          "type": "logs"
         }
       ],
-      "title": "Filesystem Utilization",
-      "type": "timeseries"
+      "title": "Logs",
+      "type": "row"
+    },
+    {
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 37
+      },
+      "id": 70,
+      "panels": [],
+      "title": "Docker Nodes",
+      "type": "row"
     },
     {
       "datasource": {
@@ -1527,7 +1494,7 @@
         "h": 8,
         "w": 3,
         "x": 0,
-        "y": 62
+        "y": 38
       },
       "id": 30,
       "options": {
@@ -1635,7 +1602,7 @@
         "h": 8,
         "w": 9,
         "x": 3,
-        "y": 62
+        "y": 38
       },
       "id": 28,
       "options": {
@@ -1734,9 +1701,9 @@
         "h": 8,
         "w": 12,
         "x": 12,
-        "y": 69
+        "y": 38
       },
-      "id": 14,
+      "id": 16,
       "options": {
         "legend": {
           "calcs": [],
@@ -1755,13 +1722,13 @@
             "uid": "P1809F7CD0C75ACF3"
           },
           "exemplar": true,
-          "expr": "node_memory_MemFree_bytes / node_memory_MemTotal_bytes",
+          "expr": "1 - node_filesystem_avail_bytes / node_filesystem_size_bytes",
           "interval": "",
-          "legendFormat": "{{instance}}",
+          "legendFormat": "{{instance}}-{{mountpoint}}",
           "refId": "A"
         }
       ],
-      "title": "Memory Utilization",
+      "title": "Filesystem Utilization",
       "type": "timeseries"
     },
     {
@@ -1825,7 +1792,7 @@
         "h": 8,
         "w": 12,
         "x": 0,
-        "y": 70
+        "y": 46
       },
       "id": 12,
       "options": {
@@ -1906,6 +1873,8 @@
             }
           },
           "mappings": [],
+          "max": 1,
+          "min": 0,
           "thresholds": {
             "mode": "absolute",
             "steps": [
@@ -1918,8 +1887,7 @@
                 "value": 80
               }
             ]
-          },
-          "unit": "deckbytes"
+          }
         },
         "overrides": []
       },
@@ -1927,9 +1895,9 @@
         "h": 8,
         "w": 12,
         "x": 12,
-        "y": 77
+        "y": 46
       },
-      "id": 22,
+      "id": 14,
       "options": {
         "legend": {
           "calcs": [],
@@ -1948,26 +1916,13 @@
             "uid": "P1809F7CD0C75ACF3"
           },
           "exemplar": true,
-          "expr": "rate(node_disk_read_bytes_total[1m]) / 1000",
-          "hide": false,
+          "expr": "node_memory_MemFree_bytes / node_memory_MemTotal_bytes",
           "interval": "",
-          "legendFormat": "read-{{instance}}-{{device}}",
+          "legendFormat": "{{instance}}",
           "refId": "A"
-        },
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "P1809F7CD0C75ACF3"
-          },
-          "exemplar": true,
-          "expr": "- rate(node_disk_written_bytes_total[1m]) / 1000",
-          "hide": false,
-          "interval": "",
-          "legendFormat": "write-{{instance}}-{{device}}",
-          "refId": "B"
         }
       ],
-      "title": "HDD R/W (KB)",
+      "title": "Memory Utilization",
       "type": "timeseries"
     },
     {
@@ -2031,7 +1986,7 @@
         "h": 8,
         "w": 12,
         "x": 0,
-        "y": 78
+        "y": 54
       },
       "id": 18,
       "options": {
@@ -2074,6 +2029,224 @@
       "type": "timeseries"
     },
     {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "P1809F7CD0C75ACF3"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "deckbytes"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 12,
+        "y": 54
+      },
+      "id": 22,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "P1809F7CD0C75ACF3"
+          },
+          "exemplar": true,
+          "expr": "rate(node_disk_read_bytes_total[1m]) / 1000",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "read-{{instance}}-{{device}}",
+          "refId": "A"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "P1809F7CD0C75ACF3"
+          },
+          "exemplar": true,
+          "expr": "- rate(node_disk_written_bytes_total[1m]) / 1000",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "write-{{instance}}-{{device}}",
+          "refId": "B"
+        }
+      ],
+      "title": "HDD R/W (KB)",
+      "type": "timeseries"
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": {
+        "type": "prometheus",
+        "uid": "P1809F7CD0C75ACF3"
+      },
+      "description": "",
+      "editable": true,
+      "error": false,
+      "fill": 1,
+      "fillGradient": 0,
+      "grid": {},
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 62
+      },
+      "hiddenSeries": false,
+      "id": 6,
+      "legend": {
+        "avg": false,
+        "current": false,
+        "max": false,
+        "min": false,
+        "show": true,
+        "total": false,
+        "values": false
+      },
+      "libraryPanel": {
+        "description": "",
+        "meta": {
+          "connectedDashboards": 1,
+          "created": "2022-03-31T04:59:53Z",
+          "createdBy": {
+            "avatarUrl": "/avatar/46d229b033af06a191ff2267bca9ae56",
+            "id": 1,
+            "name": "admin"
+          },
+          "folderName": "General",
+          "folderUid": "",
+          "updated": "2022-03-31T05:05:45Z",
+          "updatedBy": {
+            "avatarUrl": "/avatar/46d229b033af06a191ff2267bca9ae56",
+            "id": 1,
+            "name": "admin"
+          }
+        },
+        "name": "Prometheus Scrape Duration",
+        "type": "graph",
+        "uid": "Vma8C1s7z",
+        "version": 2
+      },
+      "lines": true,
+      "linewidth": 2,
+      "links": [],
+      "nullPointMode": "connected",
+      "options": {
+        "alertThreshold": true
+      },
+      "percentage": false,
+      "pluginVersion": "8.4.4",
+      "pointradius": 5,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "expr": "prometheus_target_interval_length_seconds{quantile!=\"0.01\", quantile!=\"0.05\"}",
+          "interval": "",
+          "intervalFactor": 2,
+          "legendFormat": "{{quantile}} ({{interval}})",
+          "metric": "",
+          "refId": "A",
+          "step": 2
+        }
+      ],
+      "thresholds": [],
+      "timeRegions": [],
+      "title": "Prometheus Scrape Duration",
+      "tooltip": {
+        "msResolution": false,
+        "ordering": "alphabetical",
+        "shared": true,
+        "sort": 0,
+        "value_type": "cumulative"
+      },
+      "type": "graph",
+      "xaxis": {
+        "mode": "time",
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "format": "short",
+          "logBase": 1,
+          "show": true
+        },
+        {
+          "format": "short",
+          "logBase": 1,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false
+      }
+    },
+    {
       "aliasColors": {
         "prometheus": "#F9BA8F",
         "{instance=\"localhost:9090\",interval=\"5s\",job=\"prometheus\"}": "#F9BA8F"
@@ -2095,7 +2268,7 @@
         "h": 8,
         "w": 9,
         "x": 12,
-        "y": 85
+        "y": 62
       },
       "hiddenSeries": false,
       "id": 4,
@@ -2233,7 +2406,7 @@
         "h": 8,
         "w": 3,
         "x": 21,
-        "y": 85
+        "y": 62
       },
       "id": 2,
       "libraryPanel": {
@@ -2287,123 +2460,9 @@
       ],
       "title": "Prometheus Uptime",
       "type": "stat"
-    },
-    {
-      "aliasColors": {},
-      "bars": false,
-      "dashLength": 10,
-      "dashes": false,
-      "datasource": {
-        "type": "prometheus",
-        "uid": "P1809F7CD0C75ACF3"
-      },
-      "description": "",
-      "editable": true,
-      "error": false,
-      "fill": 1,
-      "fillGradient": 0,
-      "grid": {},
-      "gridPos": {
-        "h": 8,
-        "w": 12,
-        "x": 0,
-        "y": 86
-      },
-      "hiddenSeries": false,
-      "id": 6,
-      "legend": {
-        "avg": false,
-        "current": false,
-        "max": false,
-        "min": false,
-        "show": true,
-        "total": false,
-        "values": false
-      },
-      "libraryPanel": {
-        "description": "",
-        "meta": {
-          "connectedDashboards": 1,
-          "created": "2022-03-31T04:59:53Z",
-          "createdBy": {
-            "avatarUrl": "/avatar/46d229b033af06a191ff2267bca9ae56",
-            "id": 1,
-            "name": "admin"
-          },
-          "folderName": "General",
-          "folderUid": "",
-          "updated": "2022-03-31T05:05:45Z",
-          "updatedBy": {
-            "avatarUrl": "/avatar/46d229b033af06a191ff2267bca9ae56",
-            "id": 1,
-            "name": "admin"
-          }
-        },
-        "name": "Prometheus Scrape Duration",
-        "type": "graph",
-        "uid": "Vma8C1s7z",
-        "version": 2
-      },
-      "lines": true,
-      "linewidth": 2,
-      "links": [],
-      "nullPointMode": "connected",
-      "options": {
-        "alertThreshold": true
-      },
-      "percentage": false,
-      "pluginVersion": "8.4.4",
-      "pointradius": 5,
-      "points": false,
-      "renderer": "flot",
-      "seriesOverrides": [],
-      "spaceLength": 10,
-      "stack": false,
-      "steppedLine": false,
-      "targets": [
-        {
-          "expr": "prometheus_target_interval_length_seconds{quantile!=\"0.01\", quantile!=\"0.05\"}",
-          "interval": "",
-          "intervalFactor": 2,
-          "legendFormat": "{{quantile}} ({{interval}})",
-          "metric": "",
-          "refId": "A",
-          "step": 2
-        }
-      ],
-      "thresholds": [],
-      "timeRegions": [],
-      "title": "Prometheus Scrape Duration",
-      "tooltip": {
-        "msResolution": false,
-        "ordering": "alphabetical",
-        "shared": true,
-        "sort": 0,
-        "value_type": "cumulative"
-      },
-      "type": "graph",
-      "xaxis": {
-        "mode": "time",
-        "show": true,
-        "values": []
-      },
-      "yaxes": [
-        {
-          "format": "short",
-          "logBase": 1,
-          "show": true
-        },
-        {
-          "format": "short",
-          "logBase": 1,
-          "show": true
-        }
-      ],
-      "yaxis": {
-        "align": false
-      }
     }
   ],
+  "refresh": false,
   "schemaVersion": 35,
   "style": "dark",
   "tags": [],
@@ -2411,7 +2470,7 @@
     "list": []
   },
   "time": {
-    "from": "now-1h",
+    "from": "now-30m",
     "to": "now"
   },
   "timepicker": {},

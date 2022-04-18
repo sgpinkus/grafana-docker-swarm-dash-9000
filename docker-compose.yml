@@ -70,5 +70,5 @@ services:
   app:
     image: my-app:latest
     build:
-      context: app/
+      context: stub-app-with-logging/
     network_mode: host

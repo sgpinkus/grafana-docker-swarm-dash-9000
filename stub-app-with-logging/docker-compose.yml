@@ -1,0 +1,8 @@
+version: "3"
+services:
+  app:
+    image: sp99/stub-app-with-logging:latest
+    ports:
+      - 3001
+    build:
+      context: .
