@@ -82,7 +82,7 @@
         },
         "textMode": "auto"
       },
-      "pluginVersion": "8.4.4",
+      "pluginVersion": "8.3.7",
       "targets": [
         {
           "datasource": {
@@ -147,7 +147,7 @@
         },
         "textMode": "auto"
       },
-      "pluginVersion": "8.4.4",
+      "pluginVersion": "8.3.7",
       "targets": [
         {
           "datasource": {
@@ -212,7 +212,7 @@
         },
         "textMode": "auto"
       },
-      "pluginVersion": "8.4.4",
+      "pluginVersion": "8.3.7",
       "targets": [
         {
           "datasource": {
@@ -328,7 +328,7 @@
         "showHeader": true,
         "sortBy": []
       },
-      "pluginVersion": "8.4.4",
+      "pluginVersion": "8.3.7",
       "targets": [
         {
           "datasource": {
@@ -457,7 +457,7 @@
         "showHeader": true,
         "sortBy": []
       },
-      "pluginVersion": "8.4.4",
+      "pluginVersion": "8.3.7",
       "targets": [
         {
           "datasource": {
@@ -812,7 +812,7 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 10,
+        "h": 9,
         "w": 12,
         "x": 0,
         "y": 26
@@ -948,507 +948,424 @@
       "type": "timeseries"
     },
     {
-      "collapsed": true,
+      "collapsed": false,
       "gridPos": {
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 36
+        "y": 35
       },
       "id": 72,
-      "panels": [
-        {
-          "datasource": {
-            "type": "loki",
-            "uid": "P982945308D3682D1"
-          },
-          "gridPos": {
-            "h": 7,
-            "w": 12,
-            "x": 0,
-            "y": 1
-          },
-          "id": 64,
-          "options": {
-            "dedupStrategy": "none",
-            "enableLogDetails": true,
-            "prettifyLogMessage": false,
-            "showCommonLabels": false,
-            "showLabels": false,
-            "showTime": false,
-            "sortOrder": "Descending",
-            "wrapLogMessage": false
-          },
-          "targets": [
-            {
-              "datasource": {
-                "type": "loki",
-                "uid": "P982945308D3682D1"
-              },
-              "expr": "{job=\"systemd-journal\", unit=\"docker.service\", container_name=\"prometheus-test-stack-1_app_1\"} |~ \"^http:\" | pattern `http: <ip> - - <_> \"<method> <uri> <_>\" <status> <size> <_> \"<agent>\" <_>`| status=~\"5[0-9][0-9]\"",
-              "refId": "A"
-            }
-          ],
-          "title": "Latest HTTP Application 5xx Logs",
-          "type": "logs"
-        },
-        {
-          "datasource": {
-            "type": "loki",
-            "uid": "P982945308D3682D1"
-          },
-          "description": "",
-          "fieldConfig": {
-            "defaults": {
-              "color": {
-                "mode": "palette-classic"
-              },
-              "custom": {
-                "axisLabel": "",
-                "axisPlacement": "auto",
-                "barAlignment": 0,
-                "drawStyle": "bars",
-                "fillOpacity": 25,
-                "gradientMode": "none",
-                "hideFrom": {
-                  "legend": false,
-                  "tooltip": false,
-                  "viz": false
-                },
-                "lineInterpolation": "linear",
-                "lineWidth": 1,
-                "pointSize": 5,
-                "scaleDistribution": {
-                  "type": "linear"
-                },
-                "showPoints": "auto",
-                "spanNulls": false,
-                "stacking": {
-                  "group": "A",
-                  "mode": "normal"
-                },
-                "thresholdsStyle": {
-                  "mode": "off"
-                }
-              },
-              "mappings": [],
-              "thresholds": {
-                "mode": "absolute",
-                "steps": [
-                  {
-                    "color": "green"
-                  },
-                  {
-                    "color": "red",
-                    "value": 80
-                  }
-                ]
-              }
-            },
-            "overrides": []
-          },
-          "gridPos": {
-            "h": 7,
-            "w": 12,
-            "x": 12,
-            "y": 1
-          },
-          "id": 68,
-          "options": {
-            "legend": {
-              "calcs": [],
-              "displayMode": "list",
-              "placement": "bottom"
-            },
-            "tooltip": {
-              "mode": "single",
-              "sort": "none"
-            }
-          },
-          "targets": [
-            {
-              "datasource": {
-                "type": "loki",
-                "uid": "P982945308D3682D1"
-              },
-              "expr": "count_over_time({job=\"systemd-journal\", unit=\"docker.service\", container_name=\"prometheus-test-stack-1_app_1\"} |~ \"^error:\"[1m])",
-              "legendFormat": "{{container_name}}",
-              "refId": "A"
-            }
-          ],
-          "title": "Application Error Log Rate",
-          "type": "timeseries"
-        },
-        {
-          "datasource": {
-            "type": "loki",
-            "uid": "P982945308D3682D1"
-          },
-          "description": "",
-          "fieldConfig": {
-            "defaults": {
-              "color": {
-                "mode": "palette-classic"
-              },
-              "custom": {
-                "axisLabel": "",
-                "axisPlacement": "auto",
-                "barAlignment": 0,
-                "drawStyle": "bars",
-                "fillOpacity": 25,
-                "gradientMode": "none",
-                "hideFrom": {
-                  "legend": false,
-                  "tooltip": false,
-                  "viz": false
-                },
-                "lineInterpolation": "linear",
-                "lineWidth": 1,
-                "pointSize": 5,
-                "scaleDistribution": {
-                  "type": "linear"
-                },
-                "showPoints": "auto",
-                "spanNulls": false,
-                "stacking": {
-                  "group": "A",
-                  "mode": "normal"
-                },
-                "thresholdsStyle": {
-                  "mode": "off"
-                }
-              },
-              "mappings": [],
-              "thresholds": {
-                "mode": "absolute",
-                "steps": [
-                  {
-                    "color": "green"
-                  },
-                  {
-                    "color": "red",
-                    "value": 80
-                  }
-                ]
-              }
-            },
-            "overrides": []
-          },
-          "gridPos": {
-            "h": 7,
-            "w": 12,
-            "x": 0,
-            "y": 8
-          },
-          "id": 65,
-          "options": {
-            "legend": {
-              "calcs": [],
-              "displayMode": "list",
-              "placement": "bottom"
-            },
-            "tooltip": {
-              "mode": "single",
-              "sort": "none"
-            }
-          },
-          "targets": [
-            {
-              "datasource": {
-                "type": "loki",
-                "uid": "P982945308D3682D1"
-              },
-              "expr": "count_over_time({job=\"systemd-journal\", unit=\"docker.service\", container_name=\"prometheus-test-stack-1_app_1\"} |~ \"^http:\" | pattern `http: <ip> - - <_> \"<method> <uri> <_>\" <status> <size> <_> \"<agent>\" <_>`| status=~\"5[0-9][0-9]\"[1m])",
-              "legendFormat": "{{container_name}}",
-              "refId": "A"
-            }
-          ],
-          "title": "HTTP Application 5xx Log Rate",
-          "type": "timeseries"
-        },
-        {
-          "datasource": {
-            "type": "loki",
-            "uid": "P982945308D3682D1"
-          },
-          "gridPos": {
-            "h": 7,
-            "w": 12,
-            "x": 12,
-            "y": 8
-          },
-          "id": 67,
-          "options": {
-            "dedupStrategy": "none",
-            "enableLogDetails": true,
-            "prettifyLogMessage": false,
-            "showCommonLabels": false,
-            "showLabels": false,
-            "showTime": false,
-            "sortOrder": "Descending",
-            "wrapLogMessage": false
-          },
-          "targets": [
-            {
-              "datasource": {
-                "type": "loki",
-                "uid": "P982945308D3682D1"
-              },
-              "expr": "{job=\"systemd-journal\", unit=\"docker.service\", container_name=\"prometheus-test-stack-1_app_1\"} |~ \"^error:\"",
-              "refId": "A"
-            }
-          ],
-          "title": "Latest Application Error Logs",
-          "type": "logs"
-        },
-        {
-          "datasource": {
-            "type": "loki",
-            "uid": "P982945308D3682D1"
-          },
-          "description": "",
-          "fieldConfig": {
-            "defaults": {
-              "color": {
-                "mode": "palette-classic"
-              },
-              "custom": {
-                "axisLabel": "",
-                "axisPlacement": "auto",
-                "barAlignment": 0,
-                "drawStyle": "bars",
-                "fillOpacity": 25,
-                "gradientMode": "none",
-                "hideFrom": {
-                  "legend": false,
-                  "tooltip": false,
-                  "viz": false
-                },
-                "lineInterpolation": "linear",
-                "lineWidth": 1,
-                "pointSize": 5,
-                "scaleDistribution": {
-                  "type": "linear"
-                },
-                "showPoints": "auto",
-                "spanNulls": false,
-                "stacking": {
-                  "group": "A",
-                  "mode": "normal"
-                },
-                "thresholdsStyle": {
-                  "mode": "off"
-                }
-              },
-              "mappings": [],
-              "thresholds": {
-                "mode": "absolute",
-                "steps": [
-                  {
-                    "color": "green"
-                  },
-                  {
-                    "color": "red",
-                    "value": 80
-                  }
-                ]
-              }
-            },
-            "overrides": []
-          },
-          "gridPos": {
-            "h": 7,
-            "w": 12,
-            "x": 0,
-            "y": 15
-          },
-          "id": 61,
-          "options": {
-            "legend": {
-              "calcs": [],
-              "displayMode": "list",
-              "placement": "bottom"
-            },
-            "tooltip": {
-              "mode": "single",
-              "sort": "none"
-            }
-          },
-          "targets": [
-            {
-              "datasource": {
-                "type": "loki",
-                "uid": "P982945308D3682D1"
-              },
-              "expr": "count_over_time({job=\"systemd-journal\", unit=\"docker.service\"} | logfmt | level=\"error\" [30s])",
-              "legendFormat": "{{container_name}}",
-              "refId": "A"
-            }
-          ],
-          "title": "Container Logfmt Error Log Rate",
-          "type": "timeseries"
-        },
-        {
-          "datasource": {
-            "type": "loki",
-            "uid": "P982945308D3682D1"
-          },
-          "description": "",
-          "fieldConfig": {
-            "defaults": {
-              "color": {
-                "mode": "palette-classic"
-              },
-              "custom": {
-                "axisLabel": "",
-                "axisPlacement": "auto",
-                "barAlignment": 0,
-                "drawStyle": "bars",
-                "fillOpacity": 25,
-                "gradientMode": "none",
-                "hideFrom": {
-                  "legend": false,
-                  "tooltip": false,
-                  "viz": false
-                },
-                "lineInterpolation": "linear",
-                "lineWidth": 1,
-                "pointSize": 5,
-                "scaleDistribution": {
-                  "type": "linear"
-                },
-                "showPoints": "auto",
-                "spanNulls": false,
-                "stacking": {
-                  "group": "A",
-                  "mode": "normal"
-                },
-                "thresholdsStyle": {
-                  "mode": "off"
-                }
-              },
-              "mappings": [],
-              "thresholds": {
-                "mode": "absolute",
-                "steps": [
-                  {
-                    "color": "green"
-                  },
-                  {
-                    "color": "red",
-                    "value": 80
-                  }
-                ]
-              }
-            },
-            "overrides": []
-          },
-          "gridPos": {
-            "h": 7,
-            "w": 12,
-            "x": 12,
-            "y": 15
-          },
-          "id": 66,
-          "options": {
-            "legend": {
-              "calcs": [],
-              "displayMode": "list",
-              "placement": "bottom"
-            },
-            "tooltip": {
-              "mode": "single",
-              "sort": "none"
-            }
-          },
-          "targets": [
-            {
-              "datasource": {
-                "type": "loki",
-                "uid": "P982945308D3682D1"
-              },
-              "expr": "count_over_time({job=\"systemd-journal\", unit=\"docker.service\"} | logfmt | level=\"warn\" [30s])",
-              "legendFormat": "{{container_name}}",
-              "refId": "A"
-            }
-          ],
-          "title": "Container Logfmt Logs Warning Rate",
-          "type": "timeseries"
-        },
-        {
-          "datasource": {
-            "type": "loki",
-            "uid": "P982945308D3682D1"
-          },
-          "gridPos": {
-            "h": 7,
-            "w": 12,
-            "x": 0,
-            "y": 22
-          },
-          "id": 59,
-          "options": {
-            "dedupStrategy": "none",
-            "enableLogDetails": true,
-            "prettifyLogMessage": false,
-            "showCommonLabels": false,
-            "showLabels": false,
-            "showTime": false,
-            "sortOrder": "Descending",
-            "wrapLogMessage": false
-          },
-          "targets": [
-            {
-              "datasource": {
-                "type": "loki",
-                "uid": "P982945308D3682D1"
-              },
-              "expr": "{job=\"systemd-journal\", unit=\"docker.service\"} | logfmt | level=\"error\"",
-              "refId": "A"
-            }
-          ],
-          "title": "Latest Container Logfmt Error Logs",
-          "type": "logs"
-        },
-        {
-          "datasource": {
-            "type": "loki",
-            "uid": "P982945308D3682D1"
-          },
-          "description": "",
-          "gridPos": {
-            "h": 7,
-            "w": 12,
-            "x": 12,
-            "y": 22
-          },
-          "id": 63,
-          "options": {
-            "dedupStrategy": "none",
-            "enableLogDetails": true,
-            "prettifyLogMessage": false,
-            "showCommonLabels": false,
-            "showLabels": false,
-            "showTime": false,
-            "sortOrder": "Descending",
-            "wrapLogMessage": false
-          },
-          "targets": [
-            {
-              "datasource": {
-                "type": "loki",
-                "uid": "P982945308D3682D1"
-              },
-              "expr": "{job=\"systemd-journal\", unit=\"docker.service\"} | logfmt | level=\"warn\"",
-              "refId": "A"
-            }
-          ],
-          "title": "Latest Container LogFmt Warning Logs",
-          "type": "logs"
-        }
-      ],
+      "panels": [],
       "title": "Logs",
       "type": "row"
+    },
+    {
+      "datasource": {
+        "type": "loki",
+        "uid": "P982945308D3682D1"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "bars",
+            "fillOpacity": 25,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "normal"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 12,
+        "x": 0,
+        "y": 36
+      },
+      "id": 61,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "loki",
+            "uid": "P982945308D3682D1"
+          },
+          "expr": "sum by (container_name) (count_over_time({container_name=~\".+\"} | logfmt | level=\"error\" [1m]))",
+          "legendFormat": "{{container_name}}",
+          "refId": "A"
+        },
+        {
+          "datasource": {
+            "type": "loki",
+            "uid": "P982945308D3682D1"
+          },
+          "expr": "sum by (container_name) (count_over_time({container_name=~\".+\"} |~ \"^error:\" [1m]))",
+          "hide": false,
+          "legendFormat": "{{container_name}}",
+          "refId": "B"
+        }
+      ],
+      "title": "Container Error Log Rate",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "loki",
+        "uid": "P982945308D3682D1"
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 12,
+        "x": 12,
+        "y": 36
+      },
+      "id": 59,
+      "options": {
+        "dedupStrategy": "none",
+        "enableLogDetails": true,
+        "prettifyLogMessage": false,
+        "showCommonLabels": false,
+        "showLabels": false,
+        "showTime": false,
+        "sortOrder": "Descending",
+        "wrapLogMessage": false
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "loki",
+            "uid": "P982945308D3682D1"
+          },
+          "expr": "{container_name=~\".+\"} | logfmt | level=\"error\"",
+          "refId": "A"
+        },
+        {
+          "datasource": {
+            "type": "loki",
+            "uid": "P982945308D3682D1"
+          },
+          "expr": "{container_name=~\".+\"} |~ \"^error:\"",
+          "hide": false,
+          "refId": "B"
+        }
+      ],
+      "title": "Latest Container Error Logs",
+      "type": "logs"
+    },
+    {
+      "datasource": {
+        "type": "loki",
+        "uid": "P982945308D3682D1"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "bars",
+            "fillOpacity": 25,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "normal"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 12,
+        "x": 0,
+        "y": 43
+      },
+      "id": 75,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "loki",
+            "uid": "P982945308D3682D1"
+          },
+          "expr": "sum by (container_name) (count_over_time({container_name=~\".+\"} | logfmt | level=\"warn\" [1m]))",
+          "legendFormat": "{{container_name}}",
+          "refId": "A"
+        },
+        {
+          "datasource": {
+            "type": "loki",
+            "uid": "P982945308D3682D1"
+          },
+          "expr": "sum by (container_name) (count_over_time({container_name=~\".+\"} |~ \"^warn:\" [1m]))",
+          "hide": false,
+          "legendFormat": "{{container_name}}",
+          "refId": "B"
+        }
+      ],
+      "title": "Container Warning Log Rate",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "loki",
+        "uid": "P982945308D3682D1"
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 12,
+        "x": 12,
+        "y": 43
+      },
+      "id": 76,
+      "options": {
+        "dedupStrategy": "none",
+        "enableLogDetails": true,
+        "prettifyLogMessage": false,
+        "showCommonLabels": false,
+        "showLabels": false,
+        "showTime": false,
+        "sortOrder": "Descending",
+        "wrapLogMessage": false
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "loki",
+            "uid": "P982945308D3682D1"
+          },
+          "expr": "{container_name=~\".+\"} | logfmt | level=\"warn\"",
+          "refId": "A"
+        },
+        {
+          "datasource": {
+            "type": "loki",
+            "uid": "P982945308D3682D1"
+          },
+          "expr": "{container_name=~\".+\"} |~ \"^warn:\"",
+          "hide": false,
+          "refId": "B"
+        }
+      ],
+      "title": "Latest Container Warning Logs",
+      "type": "logs"
+    },
+    {
+      "datasource": {
+        "type": "loki",
+        "uid": "P982945308D3682D1"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "bars",
+            "fillOpacity": 25,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "normal"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 12,
+        "x": 0,
+        "y": 50
+      },
+      "id": 65,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "loki",
+            "uid": "P982945308D3682D1"
+          },
+          "expr": "count_over_time({container_name=~\".+\"} |~ \"^http:\" | pattern `http: <ip> - - <_> \"<method> <uri> <_>\" <status> <size> <_> \"<agent>\" <_>`| status=~\"5[0-9][0-9]\"[1m])",
+          "legendFormat": "{{container_name}}",
+          "refId": "A"
+        }
+      ],
+      "title": "HTTP Application 5xx Log Rate",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "loki",
+        "uid": "P982945308D3682D1"
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 12,
+        "x": 12,
+        "y": 50
+      },
+      "id": 64,
+      "options": {
+        "dedupStrategy": "none",
+        "enableLogDetails": true,
+        "prettifyLogMessage": false,
+        "showCommonLabels": false,
+        "showLabels": false,
+        "showTime": false,
+        "sortOrder": "Descending",
+        "wrapLogMessage": false
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "loki",
+            "uid": "P982945308D3682D1"
+          },
+          "expr": "{container_name=~\".+\"} |~ \"^http:\" | pattern `http: <ip> - - <_> \"<method> <uri> <_>\" <status> <size> <_> \"<agent>\" <_>`| status=~\"5[0-9][0-9]\"",
+          "refId": "A"
+        }
+      ],
+      "title": "Latest HTTP Application 5xx Logs",
+      "type": "logs"
     },
     {
       "collapsed": false,
@@ -1456,7 +1373,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 37
+        "y": 57
       },
       "id": 70,
       "panels": [],
@@ -1494,7 +1411,7 @@
         "h": 8,
         "w": 3,
         "x": 0,
-        "y": 38
+        "y": 58
       },
       "id": 30,
       "options": {
@@ -1511,7 +1428,7 @@
         },
         "textMode": "auto"
       },
-      "pluginVersion": "8.4.4",
+      "pluginVersion": "8.3.7",
       "targets": [
         {
           "datasource": {
@@ -1602,7 +1519,7 @@
         "h": 8,
         "w": 9,
         "x": 3,
-        "y": 38
+        "y": 58
       },
       "id": 28,
       "options": {
@@ -1621,7 +1538,7 @@
           }
         ]
       },
-      "pluginVersion": "8.4.4",
+      "pluginVersion": "8.3.7",
       "targets": [
         {
           "datasource": {
@@ -1701,7 +1618,7 @@
         "h": 8,
         "w": 12,
         "x": 12,
-        "y": 38
+        "y": 58
       },
       "id": 16,
       "options": {
@@ -1786,13 +1703,38 @@
             ]
           }
         },
-        "overrides": []
+        "overrides": [
+          {
+            "__systemRef": "hideSeriesFrom",
+            "matcher": {
+              "id": "byNames",
+              "options": {
+                "mode": "exclude",
+                "names": [
+                  "localhost:9100-cpu"
+                ],
+                "prefix": "All except:",
+                "readOnly": true
+              }
+            },
+            "properties": [
+              {
+                "id": "custom.hideFrom",
+                "value": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": true
+                }
+              }
+            ]
+          }
+        ]
       },
       "gridPos": {
         "h": 8,
         "w": 12,
         "x": 0,
-        "y": 46
+        "y": 66
       },
       "id": 12,
       "options": {
@@ -1827,7 +1769,7 @@
           "expr": "instance:node_cpu_seconds:avg_rate1m",
           "hide": false,
           "interval": "",
-          "legendFormat": "",
+          "legendFormat": "{{instance}}-cpu",
           "refId": "B"
         }
       ],
@@ -1895,7 +1837,7 @@
         "h": 8,
         "w": 12,
         "x": 12,
-        "y": 46
+        "y": 66
       },
       "id": 14,
       "options": {
@@ -1986,7 +1928,7 @@
         "h": 8,
         "w": 12,
         "x": 0,
-        "y": 54
+        "y": 74
       },
       "id": 18,
       "options": {
@@ -2088,7 +2030,7 @@
         "h": 8,
         "w": 12,
         "x": 12,
-        "y": 54
+        "y": 74
       },
       "id": 22,
       "options": {
@@ -2150,7 +2092,7 @@
         "h": 8,
         "w": 12,
         "x": 0,
-        "y": 62
+        "y": 82
       },
       "hiddenSeries": false,
       "id": 6,
@@ -2195,7 +2137,7 @@
         "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "8.4.4",
+      "pluginVersion": "8.3.7",
       "pointradius": 5,
       "points": false,
       "renderer": "flot",
@@ -2268,7 +2210,7 @@
         "h": 8,
         "w": 9,
         "x": 12,
-        "y": 62
+        "y": 82
       },
       "hiddenSeries": false,
       "id": 4,
@@ -2313,7 +2255,7 @@
         "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "8.4.4",
+      "pluginVersion": "8.3.7",
       "pointradius": 5,
       "points": false,
       "renderer": "flot",
@@ -2406,7 +2348,7 @@
         "h": 8,
         "w": 3,
         "x": 21,
-        "y": 62
+        "y": 82
       },
       "id": 2,
       "libraryPanel": {
@@ -2449,7 +2391,7 @@
         },
         "textMode": "auto"
       },
-      "pluginVersion": "8.4.4",
+      "pluginVersion": "8.3.7",
       "targets": [
         {
           "expr": "(time() - process_start_time_seconds{job=\"prometheus\"})",
@@ -2463,7 +2405,7 @@
     }
   ],
   "refresh": false,
-  "schemaVersion": 35,
+  "schemaVersion": 34,
   "style": "dark",
   "tags": [],
   "templating": {

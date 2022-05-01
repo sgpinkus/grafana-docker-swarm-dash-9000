@@ -1,7 +1,7 @@
 version: "3"
 services:
   grafana:
-    image: grafana/grafana:8.5.0
+    image: grafana/grafana:8.3.7
     volumes:
       - ./conf/grafana/grafana.ini:/etc/grafana/grafana.ini
       - ./conf/grafana/provisioning/datasources:/etc/grafana/provisioning/datasources
@@ -72,3 +72,7 @@ services:
     build:
       context: stub-app-with-logging/
     network_mode: host
+    logging: # loki logging driver plugin needs to be installed -- https://grafana.com/docs/loki/latest/clients/docker-driver/
+      driver: loki
+      options:
+        loki-url: http://localhost:3100/loki/api/v1/push
