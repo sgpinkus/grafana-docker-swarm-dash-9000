@@ -1,5 +1,5 @@
 # OVERVIEW
-A simple first crack at a grafana/prometheus/loki monitoring dash for a docker swarm cluster using docker-compose. Components:
+A grafana/prometheus/loki monitoring dashbouard for a docker swarm cluster using docker-compose. Components:
 
   - grafana
   - prometheus
@@ -7,11 +7,15 @@ A simple first crack at a grafana/prometheus/loki monitoring dash for a docker s
   - promtail
   - cadvisor
   - node-exporter
+  - [docker-events-to-logs.sh](https://gist.github.com/sgpinkus/45f6c2728bcfb36bda29b83910fac769)
 
-*NOTES:*
+*NOTES & LIMITATIONS:*
 
-  - All containers are running in host network and there is lots of bind mounting going on to enable bare system monitoring. Promtail is configured to scrape the local journald logs.
-  - It's impossible to really simulate a multi-node swamr with a docker-compose which assumes single node. Dash works in swarm too but scraper confs need to be updated etc.
+  - All monitoring containers are running in host network and there is lots of bind mounting going on to enable bare system monitoring.
+  - Promtail is configured to scrape the local journald logs. Docker needs to be configured to send logs there (see below).
+  - scripts/docker-events-to-logs.sh is used to get service container lifecycle events from `docker events`.
+  - Will need better, more application specific log parsing in prod.
+  - It's impossible to really simulate a multi-node swarm with a docker-compose which assumes single node. Dash works in swarm too but scraper confs need to be updated.
 
 *SCREENSHOT:*
 

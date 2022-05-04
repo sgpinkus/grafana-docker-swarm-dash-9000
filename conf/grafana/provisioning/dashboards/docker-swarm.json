@@ -948,12 +948,184 @@
       "type": "timeseries"
     },
     {
+      "datasource": {
+        "type": "loki",
+        "uid": "P982945308D3682D1"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "continuous-GrYlRd"
+          },
+          "custom": {
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 20,
+            "gradientMode": "scheme",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "smooth",
+            "lineWidth": 3,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 35
+      },
+      "id": 78,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "single"
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "loki",
+            "uid": "P982945308D3682D1"
+          },
+          "expr": "sum by (swarm_service) (count_over_time({unit=\"docker-events-to-logs.service\"} | logfmt | action = \"health_status: unhealthy\"[1m]))",
+          "legendFormat": "{{swarm_service}}-service",
+          "refId": "A"
+        }
+      ],
+      "title": "Service Container Health Check Failures",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "loki",
+        "uid": "P982945308D3682D1"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "continuous-GrYlRd"
+          },
+          "custom": {
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 20,
+            "gradientMode": "scheme",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "smooth",
+            "lineWidth": 3,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 12,
+        "y": 35
+      },
+      "id": 79,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "single"
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "loki",
+            "uid": "P982945308D3682D1"
+          },
+          "expr": "sum by (swarm_service) (count_over_time({unit=\"docker-events-to-logs.service\"} | logfmt | action = \"start\"[1m]))",
+          "legendFormat": "{{swarm_service}}-service",
+          "refId": "A"
+        }
+      ],
+      "title": "Service Container Starts",
+      "type": "timeseries"
+    },
+    {
       "collapsed": false,
       "gridPos": {
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 35
+        "y": 43
       },
       "id": 72,
       "panels": [],
@@ -1020,7 +1192,7 @@
         "h": 7,
         "w": 12,
         "x": 0,
-        "y": 36
+        "y": 44
       },
       "id": 61,
       "options": {
@@ -1067,7 +1239,7 @@
         "h": 7,
         "w": 12,
         "x": 12,
-        "y": 36
+        "y": 44
       },
       "id": 59,
       "options": {
@@ -1162,7 +1334,7 @@
         "h": 7,
         "w": 12,
         "x": 0,
-        "y": 43
+        "y": 51
       },
       "id": 75,
       "options": {
@@ -1209,7 +1381,7 @@
         "h": 7,
         "w": 12,
         "x": 12,
-        "y": 43
+        "y": 51
       },
       "id": 76,
       "options": {
@@ -1304,7 +1476,7 @@
         "h": 7,
         "w": 12,
         "x": 0,
-        "y": 50
+        "y": 58
       },
       "id": 65,
       "options": {
@@ -1341,7 +1513,7 @@
         "h": 7,
         "w": 12,
         "x": 12,
-        "y": 50
+        "y": 58
       },
       "id": 64,
       "options": {
@@ -1373,7 +1545,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 57
+        "y": 65
       },
       "id": 70,
       "panels": [],
@@ -1411,7 +1583,7 @@
         "h": 8,
         "w": 3,
         "x": 0,
-        "y": 58
+        "y": 66
       },
       "id": 30,
       "options": {
@@ -1519,7 +1691,7 @@
         "h": 8,
         "w": 9,
         "x": 3,
-        "y": 58
+        "y": 66
       },
       "id": 28,
       "options": {
@@ -1618,7 +1790,7 @@
         "h": 8,
         "w": 12,
         "x": 12,
-        "y": 58
+        "y": 66
       },
       "id": 16,
       "options": {
@@ -1734,7 +1906,7 @@
         "h": 8,
         "w": 12,
         "x": 0,
-        "y": 66
+        "y": 74
       },
       "id": 12,
       "options": {
@@ -1837,7 +2009,7 @@
         "h": 8,
         "w": 12,
         "x": 12,
-        "y": 66
+        "y": 74
       },
       "id": 14,
       "options": {
@@ -1928,7 +2100,7 @@
         "h": 8,
         "w": 12,
         "x": 0,
-        "y": 74
+        "y": 82
       },
       "id": 18,
       "options": {
@@ -2030,7 +2202,7 @@
         "h": 8,
         "w": 12,
         "x": 12,
-        "y": 74
+        "y": 82
       },
       "id": 22,
       "options": {
@@ -2092,7 +2264,7 @@
         "h": 8,
         "w": 12,
         "x": 0,
-        "y": 82
+        "y": 90
       },
       "hiddenSeries": false,
       "id": 6,
@@ -2210,7 +2382,7 @@
         "h": 8,
         "w": 9,
         "x": 12,
-        "y": 82
+        "y": 90
       },
       "hiddenSeries": false,
       "id": 4,
@@ -2348,7 +2520,7 @@
         "h": 8,
         "w": 3,
         "x": 21,
-        "y": 82
+        "y": 90
       },
       "id": 2,
       "libraryPanel": {
