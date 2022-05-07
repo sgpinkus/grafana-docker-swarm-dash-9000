@@ -258,7 +258,6 @@
         "type": "prometheus",
         "uid": "P1809F7CD0C75ACF3"
       },
-      "description": "",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -287,24 +286,12 @@
           {
             "matcher": {
               "id": "byName",
-              "options": "Time"
-            },
-            "properties": [
-              {
-                "id": "custom.hidden",
-                "value": true
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
               "options": "name"
             },
             "properties": [
               {
                 "id": "custom.width",
-                "value": 308
+                "value": 336
               }
             ]
           }
@@ -316,7 +303,7 @@
         "x": 0,
         "y": 7
       },
-      "id": 56,
+      "id": 81,
       "options": {
         "footer": {
           "fields": "",
@@ -336,7 +323,7 @@
             "uid": "P1809F7CD0C75ACF3"
           },
           "exemplar": false,
-          "expr": "sort_desc(rate(container_cpu_user_seconds_total{id=~\".*docker.*\"} [1m]))",
+          "expr": "time() - container_start_time_seconds{id=~\".*docker.*\"}",
           "format": "table",
           "instant": true,
           "interval": "",
@@ -344,13 +331,13 @@
           "refId": "A"
         }
       ],
-      "title": "Container CPU Utilization",
+      "title": "Container Start Time",
       "transformations": [
         {
           "id": "filterFieldsByName",
           "options": {
             "include": {
-              "pattern": "^(name|Value)$"
+              "pattern": "name|Value"
             }
           }
         }
@@ -491,6 +478,110 @@
         "type": "prometheus",
         "uid": "P1809F7CD0C75ACF3"
       },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "align": "auto",
+            "displayMode": "auto"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Time"
+            },
+            "properties": [
+              {
+                "id": "custom.hidden",
+                "value": true
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "name"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 308
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 10,
+        "w": 6,
+        "x": 12,
+        "y": 7
+      },
+      "id": 56,
+      "options": {
+        "footer": {
+          "fields": "",
+          "reducer": [
+            "sum"
+          ],
+          "show": false
+        },
+        "showHeader": true,
+        "sortBy": []
+      },
+      "pluginVersion": "8.3.7",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "P1809F7CD0C75ACF3"
+          },
+          "exemplar": false,
+          "expr": "sort_desc(rate(container_cpu_user_seconds_total{id=~\".*docker.*\"} [1m]))",
+          "format": "table",
+          "instant": true,
+          "interval": "",
+          "legendFormat": "{{name}}",
+          "refId": "A"
+        }
+      ],
+      "title": "Container CPU Utilization",
+      "transformations": [
+        {
+          "id": "filterFieldsByName",
+          "options": {
+            "include": {
+              "pattern": "^(name|Value)$"
+            }
+          }
+        }
+      ],
+      "type": "table"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "P1809F7CD0C75ACF3"
+      },
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -542,9 +633,9 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 10,
-        "w": 12,
-        "x": 12,
+        "h": 11,
+        "w": 6,
+        "x": 18,
         "y": 7
       },
       "id": 38,
@@ -725,7 +816,7 @@
         "h": 9,
         "w": 12,
         "x": 12,
-        "y": 17
+        "y": 18
       },
       "id": 48,
       "options": {
@@ -917,7 +1008,7 @@
         "h": 9,
         "w": 12,
         "x": 12,
-        "y": 26
+        "y": 27
       },
       "id": 54,
       "options": {
@@ -1092,7 +1183,7 @@
         "h": 8,
         "w": 12,
         "x": 12,
-        "y": 35
+        "y": 36
       },
       "id": 79,
       "options": {
@@ -1125,7 +1216,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 43
+        "y": 44
       },
       "id": 72,
       "panels": [],
@@ -1192,7 +1283,7 @@
         "h": 7,
         "w": 12,
         "x": 0,
-        "y": 44
+        "y": 45
       },
       "id": 61,
       "options": {
@@ -1239,7 +1330,7 @@
         "h": 7,
         "w": 12,
         "x": 12,
-        "y": 44
+        "y": 45
       },
       "id": 59,
       "options": {
@@ -1334,7 +1425,7 @@
         "h": 7,
         "w": 12,
         "x": 0,
-        "y": 51
+        "y": 52
       },
       "id": 75,
       "options": {
@@ -1381,7 +1472,7 @@
         "h": 7,
         "w": 12,
         "x": 12,
-        "y": 51
+        "y": 52
       },
       "id": 76,
       "options": {
@@ -1476,7 +1567,7 @@
         "h": 7,
         "w": 12,
         "x": 0,
-        "y": 58
+        "y": 59
       },
       "id": 65,
       "options": {
@@ -1513,7 +1604,7 @@
         "h": 7,
         "w": 12,
         "x": 12,
-        "y": 58
+        "y": 59
       },
       "id": 64,
       "options": {
@@ -1545,7 +1636,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 65
+        "y": 66
       },
       "id": 70,
       "panels": [],
@@ -1583,7 +1674,7 @@
         "h": 8,
         "w": 3,
         "x": 0,
-        "y": 66
+        "y": 67
       },
       "id": 30,
       "options": {
@@ -1691,7 +1782,7 @@
         "h": 8,
         "w": 9,
         "x": 3,
-        "y": 66
+        "y": 67
       },
       "id": 28,
       "options": {
@@ -1790,7 +1881,7 @@
         "h": 8,
         "w": 12,
         "x": 12,
-        "y": 66
+        "y": 67
       },
       "id": 16,
       "options": {
@@ -1906,7 +1997,7 @@
         "h": 8,
         "w": 12,
         "x": 0,
-        "y": 74
+        "y": 75
       },
       "id": 12,
       "options": {
@@ -2009,7 +2100,7 @@
         "h": 8,
         "w": 12,
         "x": 12,
-        "y": 74
+        "y": 75
       },
       "id": 14,
       "options": {
@@ -2100,7 +2191,7 @@
         "h": 8,
         "w": 12,
         "x": 0,
-        "y": 82
+        "y": 83
       },
       "id": 18,
       "options": {
@@ -2202,7 +2293,7 @@
         "h": 8,
         "w": 12,
         "x": 12,
-        "y": 82
+        "y": 83
       },
       "id": 22,
       "options": {
@@ -2264,7 +2355,7 @@
         "h": 8,
         "w": 12,
         "x": 0,
-        "y": 90
+        "y": 91
       },
       "hiddenSeries": false,
       "id": 6,
@@ -2382,7 +2473,7 @@
         "h": 8,
         "w": 9,
         "x": 12,
-        "y": 90
+        "y": 91
       },
       "hiddenSeries": false,
       "id": 4,
@@ -2520,7 +2611,7 @@
         "h": 8,
         "w": 3,
         "x": 21,
-        "y": 90
+        "y": 91
       },
       "id": 2,
       "libraryPanel": {
